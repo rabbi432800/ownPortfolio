@@ -17,7 +17,7 @@ app = FastAPI(title="Md Rabbi Mia Portfolio", docs_url="/api/docs")
 app.include_router(router)
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
-PROJECT_DASHBOARD_DIR = PROJECT_ROOT / "personal-cost-manager"
+PROJECT_DASHBOARD_DIR = PROJECT_ROOT / "inner-project" / "personal-cost-manager"
 app.mount(
     "/projects/personal-cost-manager",
     StaticFiles(directory=PROJECT_DASHBOARD_DIR, html=True),

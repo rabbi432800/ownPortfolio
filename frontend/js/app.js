@@ -1,5 +1,51 @@
 "use strict";
 
+const supportedLanguages = ["ENG", "DE", "BN"];
+const savedLanguage = localStorage.getItem("portfolio-language");
+const activeLanguage = supportedLanguages.includes(savedLanguage) ? savedLanguage : "ENG";
+const translations = window.PORTFOLIO_TRANSLATIONS;
+
+const translateText = (text, language = activeLanguage) =>
+  language === "ENG" ? text : translations[language]?.[text] || text;
+
+const translatePortfolioData = (value) => {
+  if (typeof value === "string") return translateText(value);
+  if (Array.isArray(value)) return value.map(translatePortfolioData);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [key, translatePortfolioData(item)]),
+    );
+  }
+  return value;
+};
+
+const applyPageLanguage = () => {
+  document.documentElement.lang = activeLanguage === "BN" ? "bn" : activeLanguage === "DE" ? "de" : "en";
+  document.querySelectorAll("[data-language]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.language === activeLanguage));
+  });
+
+  const textNodes = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (textNodes.nextNode()) {
+    const node = textNodes.currentNode;
+    const original = node.nodeValue;
+    const trimmed = original.trim();
+    if (!trimmed) continue;
+    const translated = translateText(trimmed);
+    if (translated !== trimmed) {
+      const start = original.indexOf(trimmed);
+      node.nodeValue = `${original.slice(0, start)}${translated}${original.slice(start + trimmed.length)}`;
+    }
+  }
+
+  document.querySelectorAll("[aria-label], [title], [placeholder], [alt]").forEach((element) => {
+    for (const attribute of ["aria-label", "title", "placeholder", "alt"]) {
+      const value = element.getAttribute(attribute);
+      if (value) element.setAttribute(attribute, translateText(value));
+    }
+  });
+};
+
 const escapeHtml = (value) =>
   String(value).replace(/[&<>"']/g, (character) => {
     const entities = {
@@ -16,6 +62,7 @@ const renderTags = (items) =>
   `<div class="tag-list">${items.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>`;
 
 function renderPortfolio(data) {
+  data = translatePortfolioData(data);
   document.title = `${data.display_name} | ${data.role}`;
   document.querySelector('meta[name="description"]').content = data.introduction;
   const githubDisplay = data.github.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
@@ -62,6 +109,9 @@ function renderPortfolio(data) {
   document.querySelector('meta[name="twitter:description"]').content = data.introduction;
   document.querySelector('meta[name="twitter:image"]').content = socialImage;
   document.querySelector("#hero-name").innerHTML = `${escapeHtml(data.display_name)}<span>.</span>`;
+  document.querySelectorAll(".brand").forEach((brand) => {
+    brand.setAttribute("aria-label", `${data.display_name} ${translateText("home")}`);
+  });
   document.querySelector("#hero-role").textContent = data.role;
   document.querySelector("#hero-tagline").textContent = data.tagline;
   document.querySelector("#hero-introduction").textContent = data.introduction;
@@ -215,7 +265,7 @@ function renderPortfolio(data) {
     if (!data.email) {
       feedback.hidden = false;
       feedback.classList.add("form-feedback-warning");
-      feedback.textContent = "Contact email is not configured. Add your email in backend/config.py before using this form.";
+      feedback.textContent = translateText("Contact email is not configured. Add your email in backend/config.py before using this form.");
       return;
     }
 
@@ -227,8 +277,10 @@ function renderPortfolio(data) {
     window.location.href = `mailto:${encodeURIComponent(data.email)}?${query}`;
     feedback.hidden = false;
     feedback.classList.remove("form-feedback-warning");
-    feedback.textContent = "Your email application should open with the message prepared.";
+    feedback.textContent = translateText("Your email application should open with the message prepared.");
   });
+
+  applyPageLanguage();
 }
 
 function initializePortfolioTerminal(data) {
@@ -248,7 +300,7 @@ function initializePortfolioTerminal(data) {
   const print = (text, className = "terminal-result") => {
     const line = document.createElement("p");
     line.className = className;
-    line.textContent = text;
+    line.textContent = text.split("\n").map((part) => translateText(part)).join("\n");
     output.insertBefore(line, form);
     output.scrollTop = output.scrollHeight;
   };
@@ -289,7 +341,7 @@ function initializePortfolioTerminal(data) {
 
     const logo = document.createElement("pre");
     logo.className = "fastfetch-logo";
-    logo.setAttribute("aria-label", "Portfolio logo in terminal dot-matrix art");
+    logo.setAttribute("aria-label", translateText("Portfolio logo in terminal dot-matrix art"));
     logo.innerHTML = [
       "...........          rr",
       "        .......       .....     ..r",
@@ -324,7 +376,7 @@ function initializePortfolioTerminal(data) {
       ["OS", "Linux-inspired portfolio shell (simulated)"],
       ["User", data.display_name],
       ["Role", data.role],
-      ["Focus", "Network · Linux · Technical Support"],
+      ["Focus", translateText("Network · Linux · Technical Support")],
       ["Location", data.location],
       ["GitHub", data.github.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")],
       ["Shell", "portfolio-shell 1.0 (simulated)"],
@@ -334,8 +386,8 @@ function initializePortfolioTerminal(data) {
       const row = document.createElement("p");
       const key = document.createElement("strong");
       const detail = document.createElement("span");
-      key.textContent = `${label}`;
-      detail.textContent = value;
+      key.textContent = translateText(label);
+      detail.textContent = translateText(value);
       row.append(key, detail);
       info.append(row);
     });
@@ -345,7 +397,7 @@ function initializePortfolioTerminal(data) {
       const photo = document.createElement("img");
       photo.className = "fastfetch-photo";
       photo.src = data.photo_path;
-      photo.alt = `${data.display_name} profile`;
+      photo.alt = `${data.display_name} ${translateText("profile")}`;
       block.replaceChild(photo, logo);
     }
     output.insertBefore(block, form);
@@ -381,11 +433,11 @@ function initializePortfolioTerminal(data) {
 
   const formatPublicCommandList = () =>
     `RABBI@PORTFOLIO SHELL · COMMANDS\n\n${publicCommandList
-      .map(([name, description]) => `${name.padEnd(22)} ${description}`)
+      .map(([name, description]) => `${name.padEnd(22)} ${translateText(description)}`)
       .join("\n")}`;
 
   const openSocialProfile = (name, url) => {
-    if (!url) return `${name} profile URL is not configured yet.`;
+    if (!url) return `${name}${translateText(" profile URL is not configured yet.")}`;
     const dialog = document.querySelector("#social-dialog");
     const mark = document.querySelector("#social-dialog-mark");
     const openLink = document.querySelector("#social-dialog-open");
@@ -394,14 +446,14 @@ function initializePortfolioTerminal(data) {
       GitHub: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.56.1.76-.24.76-.54v-2.08c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 1.7 2.62 1.21 3.26.92.1-.72.39-1.21.71-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.11-1.45 3.04-1.15 3.04-1.15.61 1.54.23 2.68.12 2.96.71.78 1.14 1.78 1.14 3.01 0 4.29-2.61 5.23-5.1 5.5.4.35.76 1.02.76 2.06v3.07c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/></svg>',
       LinkedIn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.9H4.96V9.34h2.97v9.56ZM6.45 8.03a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.49 10.87h-2.97v-4.65c0-1.11-.02-2.54-1.55-2.54-1.56 0-1.8 1.21-1.8 2.46v4.73H9.65V9.34h2.85v1.3h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.58 1.98 3.58 4.55v5.25Z"/></svg>',
     };
-    document.querySelector("#social-dialog-title").textContent = `Rabbi's ${name} profile`;
+    document.querySelector("#social-dialog-title").textContent = translateText(`Rabbi's ${name} profile`);
     document.querySelector("#social-dialog-url").textContent = url;
     document.querySelector("#social-dialog-copy-status").textContent = "";
     mark.dataset.network = name.toLowerCase();
     mark.innerHTML = icons[name] || "";
     openLink.href = url;
     if (!dialog.open) dialog.showModal();
-    return `${name} profile link ready. Choose Profile or View later.`;
+    return `${name}${translateText(" profile link ready. Choose Profile or View later.")}`;
   };
 
   const socialDialog = document.querySelector("#social-dialog");
@@ -412,10 +464,10 @@ function initializePortfolioTerminal(data) {
     const status = document.querySelector("#social-dialog-copy-status");
     try {
       await navigator.clipboard.writeText(url);
-      status.textContent = "Profile link copied.";
+      status.textContent = translateText("Profile link copied.");
     } catch (error) {
       console.error("Could not copy the social profile link:", error);
-      status.textContent = "Could not copy the link. Select and copy the URL above.";
+      status.textContent = translateText("Could not copy the link. Select and copy the URL above.");
     }
   });
   socialDialog.addEventListener("click", (event) => {
@@ -442,7 +494,7 @@ function initializePortfolioTerminal(data) {
       );
       return groups.length
         ? formatSkills(groups)
-        : `No portfolio skills matched "${topic}". Try: linux, network, database, automation.`;
+        : `${translateText("No portfolio skills matched")} "${topic}". ${translateText("Try: linux, network, database, automation.")}`;
     },
     linux: () => {
       const group = data.skills.find((item) =>
@@ -603,7 +655,7 @@ function initializePortfolioTerminal(data) {
         const isKnownDirectory = ["skills", "experience", "projects", "education"].includes(directory) ||
           projectDirectoryNames.includes(directory);
         if (!isKnownDirectory) {
-          print(`cd: ${argument}: no such portfolio directory`, "terminal-error");
+          print(`${translateText("cd:")} ${argument}: ${translateText("no such portfolio directory")}`, "terminal-error");
           return;
         }
         currentDirectory = directory;
@@ -623,7 +675,7 @@ function initializePortfolioTerminal(data) {
         history: "history — show commands entered in this terminal session.",
         show: "show — list every available public portfolio command.",
       };
-      print(helpText[helpTopic] || `No detailed help for "${argument}". Run help to list commands.`);
+      print(helpText[helpTopic] || `${translateText("No detailed help for")} "${argument}". ${translateText("Run help to list commands.")}`);
       return;
     }
 
@@ -632,7 +684,7 @@ function initializePortfolioTerminal(data) {
       return;
     }
 
-    print(`zsh: command not found: ${commandName}\nType "help" to see available portfolio commands.`, "terminal-error");
+    print(`${translateText("zsh: command not found:")} ${commandName}\n${translateText('Type "help" to see available portfolio commands.')}`, "terminal-error");
   };
 
   form.addEventListener("submit", (event) => {
@@ -687,15 +739,23 @@ const navigation = document.querySelector("#main-navigation");
 menuButton.addEventListener("click", () => {
   const expanded = menuButton.getAttribute("aria-expanded") === "true";
   menuButton.setAttribute("aria-expanded", String(!expanded));
-  menuButton.setAttribute("aria-label", expanded ? "Open navigation" : "Close navigation");
+  menuButton.setAttribute("aria-label", translateText(expanded ? "Open navigation" : "Close navigation"));
   navigation.classList.toggle("navigation-open", !expanded);
+});
+
+document.querySelectorAll("[data-language]").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.dataset.language === activeLanguage) return;
+    localStorage.setItem("portfolio-language", button.dataset.language);
+    window.location.reload();
+  });
 });
 
 navigation.querySelectorAll("a").forEach((link) => {
   link.addEventListener("click", () => {
     navigation.classList.remove("navigation-open");
     menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "Open navigation");
+    menuButton.setAttribute("aria-label", translateText("Open navigation"));
   });
 });
 

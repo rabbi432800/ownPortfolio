@@ -7,13 +7,20 @@
     <meta name="theme-color" content="#080d16">
     <title>Full Portfolio Editor | Md Rabbi Mia</title>
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/static/css/admin.css?v=20261028-admin-actions-22">
+    <script src="/static/js/theme.js?v=20261028-theme-switcher-2"></script>
+    <link rel="stylesheet" href="/static/css/admin.css?v=20261028-editor-theme-23">
+    <link rel="stylesheet" href="/static/css/theme.css?v=20261028-theme-switcher-3">
     <script src="/static/js/editor.js?v=20261028-editor-actions-16" defer></script>
   </head>
-  <body>
+  <body class="admin-page">
     <main class="admin-shell editor-shell">
       <section class="admin-card editor-card">
-        <a class="admin-return-button" href="/myterminal">← Return to admin panel</a>
+        <div class="editor-top-actions">
+          <a class="admin-return-button" href="/myterminal">← Return to admin panel</a>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
+            <span data-theme-icon aria-hidden="true">☼</span><span data-theme-label>Light</span>
+          </button>
+        </div>
         <header class="editor-header">
           <div>
             <p class="admin-eyebrow">FULL PORTFOLIO CONTENT</p>

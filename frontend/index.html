@@ -15,8 +15,11 @@
     <meta name="twitter:title" content="__PAGE_TITLE__">
     <meta name="twitter:description" content="__PAGE_DESCRIPTION__">
     <meta name="twitter:image" content="__OG_IMAGE_URL__">
-    <link rel="stylesheet" href="/static/css/style.css?v=20261028-highlights-centered-26">
-    <script src="/static/js/app.js?v=20261028-logo-variants-23" defer></script>
+    <script src="/static/js/theme.js?v=20261028-theme-switcher-2"></script>
+    <link rel="stylesheet" href="/static/css/style.css?v=20261028-language-switcher-31">
+    <link rel="stylesheet" href="/static/css/theme.css?v=20261028-theme-switcher-6">
+    <script src="/static/js/translations.js?v=20261028-language-switcher-4" defer></script>
+    <script src="/static/js/app.js?v=20261028-language-switcher-29" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -35,6 +38,14 @@
           <a href="#skills">Skills</a>
           <a href="#projects">Projects</a>
           <a href="#education">Education</a>
+          <div class="language-switcher" role="group" aria-label="Choose language">
+            <button type="button" data-language="ENG" aria-pressed="true">ENG</button>
+            <button type="button" data-language="DE" aria-pressed="false">DE</button>
+            <button type="button" data-language="BN" aria-pressed="false">BN</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
+            <span data-theme-icon aria-hidden="true">☼</span><span data-theme-label>Light</span>
+          </button>
           <a class="nav-cta" href="#contact">Let&apos;s talk <span aria-hidden="true">↗</span></a>
         </nav>
       </div>

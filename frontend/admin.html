@@ -7,12 +7,19 @@
     <meta name="theme-color" content="#080d16">
     <title>Portfolio Admin | Md Rabbi Mia</title>
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <script src="/static/js/theme.js?v=20261028-theme-switcher-2"></script>
     <link rel="stylesheet" href="/static/css/admin.css?v=20261028-project-dropdown-hover-fix-29">
+    <link rel="stylesheet" href="/static/css/theme.css?v=20261028-theme-switcher-3">
     <script src="/static/js/admin.js?v=20261028-project-hover-12" defer></script>
   </head>
-  <body>
+  <body class="admin-page">
     <main class="admin-shell">
       <section class="admin-card" id="login-view">
+        <div class="admin-theme-control">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
+            <span data-theme-icon aria-hidden="true">☼</span><span data-theme-label>Light</span>
+          </button>
+        </div>
         <p class="admin-eyebrow">PRIVATE WORKSPACE</p>
         <h1>Admin sign in</h1>
         <p class="admin-description">Sign in to update your public portfolio profile and visual identity.</p>
@@ -38,6 +45,9 @@
               </nav>
             </details>
           </nav>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
+            <span data-theme-icon aria-hidden="true">☼</span><span data-theme-label>Light</span>
+          </button>
           <button class="secondary-button" id="logout-button" type="button">Sign out</button>
         </div>
         <header class="dashboard-header">

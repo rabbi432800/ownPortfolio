@@ -47,6 +47,12 @@ signing in; the temporary password is intentionally refused for non-local client
 Use the admin panel to update public profile details. Initial/default content
 is defined in `backend/config.py`. The contact form opens the visitor's email
 application; it does not send or store messages.
+The public site offers English (default), German, and Bengali. A visitor's
+language choice is remembered in their browser; add translations for new
+portfolio copy in `frontend/js/translations.js`.
+Visitors can also switch between dark and light themes from the public site,
+admin panel, portfolio editor, or project dashboard. The selected theme is
+shared across these pages and remembered in the browser.
 
 ## Docker
 
