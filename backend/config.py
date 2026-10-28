@@ -1,0 +1,270 @@
+PORTFOLIO = {
+    "display_name": "Md Rabbi Mia",
+    "formal_name": "Md Rabbi Mia",
+    "role": "NOC Engineer | Linux & Network Operations",
+    "tagline": "Keeping networks reliable. Solving technical problems. Building useful tools.",
+    "location": "Bangladesh",
+    "email": "mdrabbimia432800@gmail.com",
+    "github": "https://github.com/rabbi432800",
+    "linkedin": "https://www.linkedin.com/login/",
+    "facebook": "https://www.facebook.com/sakib.shuvo.92",
+    "cv_path": "",
+    "photo_path": "",
+    "logo_path": "",
+    "logo_dark_path": "",
+    "logo_light_path": "",
+    "favicon_path": "",
+    "og_image_path": "",
+    "introduction": (
+        "I work in network operations and technical support, with practical "
+        "exposure to ISP billing systems, Linux environments, connectivity "
+        "troubleshooting, and database operations. I also build personal "
+        "projects to strengthen my software and infrastructure skills."
+    ),
+    "about": [
+        "My professional work focuses on supporting ISP operations, investigating technical issues, monitoring network connectivity, and helping customers resolve service-related problems.",
+        "Outside daily support work, I explore Linux administration, Oracle SQL, Docker, virtualization, and automation through practical projects and a personal lab.",
+    ],
+    "highlights": [
+        {"value": "2024–Now", "label": "NOC & Technical Support"},
+        {"value": "Networking", "label": "Core Experience"},
+        {"value": "Linux", "label": "Server Operations"},
+        {"value": "Automation", "label": "Ongoing Learning"},
+    ],
+    "experience": [
+        {
+            "company": "Maestro Solutions Ltd.",
+            "role": "Executive — NOC",
+            "period": "January 2024 – Present",
+            "type": "Professional Experience",
+            "description": (
+                "Supporting ISP customers and operational teams with billing "
+                "software, network-related troubleshooting, and technical investigations."
+            ),
+            "responsibilities": [
+                "Monitor and troubleshoot network connectivity and service-related issues.",
+                "Provide technical support for maXim ISP Billing Software.",
+                "Investigate payment gateway, customer account, and billing workflow issues.",
+                "Perform authorized database record operations and coordinate database changes through approved processes.",
+                "Support router, switch, and OLT-related troubleshooting.",
+                "Assist with backup operations, technical documentation, and tutorial preparation.",
+            ],
+            "technologies": [
+                "Linux",
+                "ISP Billing",
+                "Networking",
+                "SQL",
+                "Oracle",
+                "Technical Support",
+            ],
+        },
+        {
+            "company": "Romance Cable Network",
+            "role": "Network Engineering Intern / Trainee",
+            "period": "July 2023 – December 2023",
+            "type": "Internship",
+            "description": (
+                "Gained practical exposure to network operations and customer "
+                "connectivity support in an ISP environment."
+            ),
+            "responsibilities": [
+                "Assist with customer connectivity checks and basic troubleshooting.",
+                "Learn network monitoring and operational workflows.",
+                "Gain exposure to routers, switches, OLT equipment, and CRM workflows.",
+            ],
+            "technologies": ["Networking", "Routers", "Switches", "OLT", "CRM"],
+        },
+    ],
+    "skills": [
+        {
+            "category": "Network Operations",
+            "description": "Connectivity troubleshooting and ISP support workflows.",
+            "items": [
+                "Network Monitoring",
+                "TCP/IP Fundamentals",
+                "Router & Switch Troubleshooting",
+                "OLT Support",
+                "ISP Operations",
+            ],
+        },
+        {
+            "category": "Linux & Infrastructure",
+            "description": "Server operations and hands-on infrastructure learning.",
+            "items": [
+                "Linux CLI",
+                "Service Troubleshooting",
+                "Docker",
+                "Proxmox VE",
+                "Server Monitoring",
+            ],
+        },
+        {
+            "category": "Database & Billing",
+            "description": "Operational database work and billing-system support.",
+            "items": [
+                "Oracle Database",
+                "SQL",
+                "Data Validation",
+                "ISP Billing Systems",
+                "Payment Gateway Investigation",
+            ],
+        },
+        {
+            "category": "Development & Automation",
+            "description": "Practical scripting and small workflow improvements.",
+            "items": [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Python Fundamentals",
+                "Google Sheets",
+                "Google Apps Script",
+            ],
+        },
+    ],
+    "projects": [
+        {
+            "title": "Monthly Cost Management",
+            "category": "Personal Project",
+            "status": "In Development",
+            "description": (
+                "A personal expense, advance, balance, and monthly-report "
+                "management application using a web frontend, FastAPI, and Oracle Database."
+            ),
+            "features": [
+                "Expense and advance entry workflows",
+                "Monthly reporting and balance summaries",
+                "Role-aware user summaries",
+                "Local containerized development environment",
+            ],
+            "stack": ["HTML", "CSS", "JavaScript", "FastAPI", "Oracle", "Docker"],
+            "link": "https://github.com/rabbi432800/monthly-cost-management",
+            "link_label": "View source code",
+        },
+        {
+            "title": "Expense Tracking Automation",
+            "category": "Automation Project",
+            "status": "Personal Workflow",
+            "description": (
+                "A Google Forms, Google Sheets, and Apps Script workflow explored "
+                "for collecting expense information and organizing records."
+            ),
+            "features": [
+                "Structured data entry",
+                "Spreadsheet-based record management",
+                "Automation of repetitive tasks",
+            ],
+            "stack": ["Google Forms", "Google Sheets", "Apps Script"],
+            "link": "",
+            "link_label": "",
+        },
+        {
+            "title": "Appointment Availability Monitor",
+            "category": "Learning Project",
+            "status": "Planned",
+            "description": (
+                "A planned monitoring tool to learn browser automation, availability "
+                "checks, local data storage, and desktop interfaces."
+            ),
+            "features": [
+                "Browser automation with Playwright",
+                "SQLite-based local records",
+                "Potential desktop interface using PySide6",
+            ],
+            "stack": ["Python", "Playwright", "SQLite", "PySide6"],
+            "link": "",
+            "link_label": "",
+        },
+        {
+            "title": "Linux & Virtualization Lab",
+            "category": "Learning Lab",
+            "status": "Ongoing Learning",
+            "description": (
+                "A hands-on learning environment for Linux server administration, "
+                "containers, virtualization, and database services."
+            ),
+            "features": [
+                "Linux service management",
+                "Docker container operations",
+                "Proxmox and virtual machine practice",
+                "Oracle database environment practice",
+            ],
+            "stack": ["Linux", "Docker", "Proxmox VE", "Oracle"],
+            "link": "",
+            "link_label": "",
+        },
+    ],
+    "education": [
+        {
+            "institution": "Prime University",
+            "qualification": "BSc in Computer Science and Engineering",
+            "period": "Spring 2026 – Present",
+            "result": "In progress",
+            "details": "Undergraduate study in Computer Science and Engineering.",
+        },
+        {
+            "institution": "Institution name to confirm",
+            "qualification": "Diploma in Computer Technology",
+            "period": "August 2019 – December 2023",
+            "result": "CGPA 3.68 / 4.00",
+            "details": "Diploma-level study in computer technology.",
+        },
+        {
+            "institution": "Shimuldair M.L. High School",
+            "qualification": "Secondary School Certificate (SSC)",
+            "period": "2019",
+            "result": "GPA 4.44 / 5.00",
+            "details": "Science group.",
+        },
+    ],
+    "training": [
+        {
+            "name": "CCNA Fundamentals & Linux",
+            "provider": "West Tech IT",
+            "details": (
+                "Training in networking fundamentals and Linux. "
+                "No certification is claimed."
+            ),
+        },
+        {
+            "name": "Computer Service & Hardware Technician",
+            "provider": "Technical Training Centre (TTC), Jessore",
+            "details": "Technical training in computer hardware and servicing.",
+        },
+        {
+            "name": "German Language Course — B1 Level",
+            "provider": "Course provider to confirm",
+            "details": (
+                "German language learning. No external examination certificate is claimed."
+            ),
+        },
+    ],
+    "knowledge_sharing": [
+        {
+            "title": "Linux Administration",
+            "description": (
+                "Command-line workflows, service checks, logs, and common "
+                "troubleshooting steps."
+            ),
+        },
+        {
+            "title": "Networking Fundamentals",
+            "description": (
+                "Connectivity checks, IP addressing, and practical ISP support concepts."
+            ),
+        },
+        {
+            "title": "ISP Billing Support",
+            "description": (
+                "Structured troubleshooting and clear technical documentation "
+                "for billing workflows."
+            ),
+        },
+        {
+            "title": "Infrastructure Learning",
+            "description": (
+                "Practical notes from Docker, virtual machines, and database lab exercises."
+            ),
+        },
+    ],
+}

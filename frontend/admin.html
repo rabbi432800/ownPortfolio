@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#080d16">
+    <title>Portfolio Admin | Md Rabbi Mia</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/css/admin.css?v=20261028-project-dropdown-hover-fix-29">
+    <script src="/static/js/admin.js?v=20261028-project-hover-12" defer></script>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-card" id="login-view">
+        <p class="admin-eyebrow">PRIVATE WORKSPACE</p>
+        <h1>Admin sign in</h1>
+        <p class="admin-description">Sign in to update your public portfolio profile and visual identity.</p>
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input id="username" name="username" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <button class="primary-button" type="submit">Sign in</button>
+        </form>
+        <p class="form-message" id="login-message" role="status" hidden></p>
+      </section>
+
+      <section class="admin-card dashboard-card" id="dashboard-view" hidden>
+        <div class="dashboard-top-actions">
+          <a class="admin-return-button" href="/">← Return to portfolio</a>
+          <nav class="dashboard-menu" aria-label="Dashboard navigation">
+            <a href="/myterminal/editor">Edit full portfolio</a>
+            <details class="project-menu">
+              <summary>Projects <span aria-hidden="true">⌄</span></summary>
+              <nav class="project-menu-list" aria-label="Projects">
+                <a href="/projects/personal-cost-manager/">personal-cost-manager <span aria-hidden="true">↗</span></a>
+              </nav>
+            </details>
+          </nav>
+          <button class="secondary-button" id="logout-button" type="button">Sign out</button>
+        </div>
+        <header class="dashboard-header">
+          <div>
+            <p class="admin-eyebrow">PORTFOLIO CONTROL PANEL</p>
+            <h1>Portfolio dashboard</h1>
+            <p class="admin-description">Manage your profile, website branding, and public settings.</p>
+          </div>
+        </header>
+
+        <div class="image-settings">
+          <section class="image-setting photo-setting">
+            <img class="image-preview photo-preview" id="photo-preview" alt="Current profile photo" hidden>
+            <div>
+              <h2>Profile photo</h2>
+              <p>Shown in the terminal profile display. PNG, JPG, or WebP; up to 5 MB.</p>
+            </div>
+            <div class="upload-actions">
+              <label class="upload-button">
+                <span data-choose-label="photo">Choose photo</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" data-image-kind="photo">
+              </label>
+              <button class="image-upload-button" type="button" data-upload-kind="photo" disabled>Upload</button>
+            </div>
+            <input name="photo_path" type="hidden">
+          </section>
+          <input name="logo_path" type="hidden">
+          <section class="image-setting logo-setting">
+            <img class="image-preview logo-preview" id="logo-dark-preview" alt="Current dark website logo" hidden>
+            <div>
+              <h2>Dark website logo</h2>
+              <p>Used on dark backgrounds. PNG, JPG, or WebP; up to 5 MB.</p>
+            </div>
+            <div class="upload-actions">
+              <label class="upload-button">
+                <span data-choose-label="logo-dark">Choose logo</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" data-image-kind="logo-dark">
+              </label>
+              <button class="image-upload-button" type="button" data-upload-kind="logo-dark" disabled>Upload</button>
+            </div>
+            <input name="logo_dark_path" type="hidden">
+          </section>
+          <section class="image-setting logo-setting">
+            <img class="image-preview logo-preview" id="logo-light-preview" alt="Current light website logo" hidden>
+            <div>
+              <h2>Light website logo</h2>
+              <p>Used on light backgrounds. PNG, JPG, or WebP; up to 5 MB.</p>
+            </div>
+            <div class="upload-actions">
+              <label class="upload-button">
+                <span data-choose-label="logo-light">Choose logo</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" data-image-kind="logo-light">
+              </label>
+              <button class="image-upload-button" type="button" data-upload-kind="logo-light" disabled>Upload</button>
+            </div>
+            <input name="logo_light_path" type="hidden">
+          </section>
+          <section class="image-setting logo-setting">
+            <img class="image-preview favicon-preview" id="favicon-preview" alt="Current browser favicon" hidden>
+            <div>
+              <h2>Browser favicon</h2>
+              <p>Shown in browser tabs and bookmarks. PNG, JPG, or WebP; up to 5 MB.</p>
+            </div>
+            <div class="upload-actions">
+              <label class="upload-button">
+                <span data-choose-label="favicon">Choose favicon</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" data-image-kind="favicon">
+              </label>
+              <button class="image-upload-button" type="button" data-upload-kind="favicon" disabled>Upload</button>
+            </div>
+            <input name="favicon_path" type="hidden">
+          </section>
+          <section class="image-setting og-image-setting">
+            <img class="image-preview og-image-preview" id="og-image-preview" alt="Current social sharing image" hidden>
+            <div>
+              <h2>Open Graph image</h2>
+              <p>Social preview image. Recommended size: 1200 × 630 px.</p>
+            </div>
+            <div class="upload-actions">
+              <label class="upload-button">
+                <span data-choose-label="og-image">Choose image</span>
+                <input type="file" accept="image/png,image/jpeg,image/webp" data-image-kind="og-image">
+              </label>
+              <button class="image-upload-button" type="button" data-upload-kind="og-image" disabled>Upload</button>
+            </div>
+            <input name="og_image_path" type="hidden">
+          </section>
+        </div>
+
+        <h2 class="settings-title">Website settings</h2>
+        <form id="settings-form">
+          <div class="settings-grid">
+            <label>
+              Display name
+              <input name="display_name" maxlength="100" required>
+            </label>
+            <label>
+              Role / title
+              <input name="role" maxlength="140" required>
+            </label>
+            <label class="full-width">
+              Tagline
+              <input name="tagline" maxlength="240" required>
+            </label>
+            <label>
+              Location
+              <input name="location" maxlength="100" required>
+            </label>
+            <label>
+              Public email
+              <input name="email" type="email" maxlength="254">
+            </label>
+            <label>
+              GitHub URL
+              <input name="github" type="url" maxlength="300">
+            </label>
+            <label>
+              LinkedIn URL
+              <input name="linkedin" type="url" maxlength="300">
+            </label>
+            <label>
+              Facebook URL
+              <input name="facebook" type="url" maxlength="300">
+            </label>
+            <label class="full-width">
+              Introduction
+              <textarea name="introduction" rows="4" maxlength="1200" required></textarea>
+            </label>
+            <label class="full-width">
+              About paragraphs <span class="field-hint">Separate paragraphs with a blank line.</span>
+              <textarea name="about" rows="5" required></textarea>
+            </label>
+          </div>
+
+          <footer class="form-footer settings-footer">
+            <a class="secondary-button admin-return-button" href="/">← Return to portfolio</a>
+            <p class="form-message" id="settings-message" role="status" hidden></p>
+            <button class="secondary-button" id="reset-settings-button" type="button">Reset</button>
+            <button class="primary-button" type="submit">Save</button>
+          </footer>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

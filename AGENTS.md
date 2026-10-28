@@ -1,9 +1,13 @@
-<!-- BEGIN:nextjs-agent-rules -->
+## Project architecture
 
-## This is NOT the Next.js you know
+- Frontend: plain HTML, CSS, and vanilla JavaScript in `frontend/`.
+- Backend: FastAPI routes and portfolio data in `backend/`.
+- The FastAPI app serves frontend assets and the same-origin JSON API.
+- There is no database or frontend bundler in this portfolio project.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+## Development
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- Install Python dependencies with `python -m pip install -r backend/requirements.txt`.
+- Run locally with `uvicorn backend.server:app --reload`.
+- Check `/api/health` and `/api/portfolio`.
+- Keep portfolio facts accurate; do not imply planned work or training is completed certification.

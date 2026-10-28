@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#080d16">
+    <title>Full Portfolio Editor | Md Rabbi Mia</title>
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/css/admin.css?v=20261028-admin-actions-22">
+    <script src="/static/js/editor.js?v=20261028-editor-actions-16" defer></script>
+  </head>
+  <body>
+    <main class="admin-shell editor-shell">
+      <section class="admin-card editor-card">
+        <a class="admin-return-button" href="/myterminal">← Return to admin panel</a>
+        <header class="editor-header">
+          <div>
+            <p class="admin-eyebrow">FULL PORTFOLIO CONTENT</p>
+            <h1>Portfolio editor</h1>
+            <p class="admin-description">Edit every text field across your public portfolio. Save to publish your changes.</p>
+          </div>
+          <a class="secondary-button" href="/" target="_blank" rel="noopener noreferrer">Preview website ↗</a>
+        </header>
+
+        <div class="editor-toolbar">
+          <p>Edit entries in each section, add new projects, courses, experience, and more, or remove entries you no longer need. Manage photos and logo in the dashboard.</p>
+          <p class="form-message" id="editor-message" role="status" hidden></p>
+        </div>
+
+        <form id="full-editor-form" hidden>
+          <div id="editor-sections" class="editor-sections" aria-live="polite"></div>
+          <footer class="form-footer editor-footer">
+            <a class="secondary-button admin-return-button" href="/myterminal">← Return to admin panel</a>
+            <button class="secondary-button editor-reset-button" id="reset-editor-button" type="button">Reset</button>
+            <button class="primary-button" type="submit">Save</button>
+          </footer>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
