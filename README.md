@@ -278,6 +278,42 @@ All application API routes use the `/api` prefix. See `/api/docs` for request sc
 
 The session cookie is scoped to `/api/admin`. Login accepts JSON containing `username` and `password`. Upload responses contain a `path` to use in a later settings save.
 
+## GitHub Pages public demo
+
+`docs/` contains a separate static export of the public portfolio. Local FastAPI continues to use the root `index.html` and `frontend/`; the demo does not change local admin functionality.
+
+### Refresh the demo
+
+From the repository root, run:
+
+```bash
+python scripts/build_demo.py
+```
+
+The exporter uses the current saved public portfolio (or defaults when no saved JSON exists), copies referenced public images, and generates relative CSS/JS/image paths. It includes no admin pages, credentials, or backend code. Uploaded images referenced by the public page become part of the committed demo. Review `docs/portfolio.json` and images before publishing.
+
+After changing public content, styling, or JavaScript, rerun the exporter and commit the updated `docs/` files along with the source changes. The demo is a snapshot; local admin edits do not automatically update the published demo.
+
+### Preview locally
+
+```bash
+python -m http.server 8080 --directory docs
+```
+
+Open <http://localhost:8080/>. Stop with `Ctrl+C`. Use an HTTP server rather than opening the demo as a `file://` URL, because it fetches JSON.
+
+### Enable GitHub Pages
+
+1. Push the generated `docs/` directory to `main`.
+2. In the GitHub repository, open **Settings → Pages**.
+3. Choose **Deploy from a branch** as the source.
+4. Select branch **main**, folder **/docs**, and save.
+5. Wait for the Pages deployment to finish; use the URL shown in Settings.
+
+For this repository, the expected project URL is <https://rabbi432800.github.io/ownPortfolio/> once Pages is enabled and deployment succeeds. Add the published URL to the repository's **About → Website** field if desired.
+
+The public portfolio, themes, translations, and simulated terminal work in the demo. Admin login, uploads, and server-side saves are available only in the FastAPI application. The terminal's `myterminal` command explains that admin access is unavailable in the public demo.
+
 ## Docker
 
 ### Image contents
