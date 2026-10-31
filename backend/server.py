@@ -40,7 +40,7 @@ def home(request: Request) -> HTMLResponse:
     og_image_path = portfolio["og_image_path"]
     base_url = str(request.base_url).rstrip("/")
 
-    content = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
+    content = (PROJECT_ROOT / "index.html").read_text(encoding="utf-8")
     content = content.replace("__PAGE_TITLE__", escape(title, quote=True))
     content = content.replace("__PAGE_DESCRIPTION__", escape(description, quote=True))
     content = content.replace("__FAVICON_URL__", escape(favicon_path, quote=True))

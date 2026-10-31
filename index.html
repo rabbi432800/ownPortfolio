@@ -6,6 +6,11 @@
     <meta name="description" content="__PAGE_DESCRIPTION__">
     <meta name="theme-color" content="#080d16">
     <title>__PAGE_TITLE__</title>
+
+      <!-- start the fastAPI to live the local page -->
+    <!-- cd /home/rabbi/portfolio-project
+.venv/bin/python -m uvicorn backend.server:app --reload --port 8012 -->
+
     <link rel="icon" href="__FAVICON_URL__">
     <meta property="og:type" content="website">
     <meta property="og:title" content="__PAGE_TITLE__">
@@ -16,10 +21,10 @@
     <meta name="twitter:description" content="__PAGE_DESCRIPTION__">
     <meta name="twitter:image" content="__OG_IMAGE_URL__">
     <script src="/static/js/theme.js?v=20261028-theme-switcher-2"></script>
-    <link rel="stylesheet" href="/static/css/style.css?v=20261028-language-switcher-31">
-    <link rel="stylesheet" href="/static/css/theme.css?v=20261028-theme-switcher-6">
-    <script src="/static/js/translations.js?v=20261028-language-switcher-4" defer></script>
-    <script src="/static/js/app.js?v=20261028-language-switcher-29" defer></script>
+    <link rel="stylesheet" href="/static/css/style.css?v=20261031-details-1">
+    <link rel="stylesheet" href="/static/css/theme.css?v=20261029-typography-1">
+    <script src="/static/js/translations.js?v=20261031-details-1" defer></script>
+    <script src="/static/js/app.js?v=20261031-details-1" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -60,7 +65,6 @@
             <h1 id="hero-name">Md Rabbi Mia<span>.</span></h1>
             <h2 id="hero-role">NOC Engineer | Linux &amp; Network Operations</h2>
             <p class="hero-tagline" id="hero-tagline">Keeping networks reliable. Solving technical problems. Building useful tools.</p>
-            <p class="hero-description" id="hero-introduction">I work in network operations and technical support, with practical exposure to ISP billing systems, Linux environments, connectivity troubleshooting, and database operations.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a>
               <a class="button button-secondary" href="#contact">Contact me</a>
@@ -72,33 +76,11 @@
             </div>
           </div>
           <div class="hero-visual">
-            <div class="visual-orbit orbit-one"></div>
-            <div class="visual-orbit orbit-two"></div>
-            <section class="terminal-shell" aria-label="Interactive portfolio terminal">
-              <div class="profile-terminal">
-                <div class="terminal-titlebar">
-                  <span class="terminal-dots"><i></i><i></i><i></i></span>
-                  <span class="terminal-window-title">rabbi@portfolio: ~</span>
-                  <span class="terminal-mode"><span class="terminal-live-dot"></span> PORTFOLIO SHELL</span>
-                </div>
-                <div class="terminal-output" id="terminal-output" role="log" aria-live="polite" aria-relevant="additions">
-                  <form class="terminal-command-form" id="terminal-form">
-                    <label class="terminal-prompt" for="terminal-input"><span class="prompt-bracket">[</span><span class="prompt-user">rabbi@portfolio</span><span class="prompt-path">~</span><span class="prompt-bracket">]</span><span class="prompt-symbol">$</span></label>
-                    <input id="terminal-input" name="command" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Enter a portfolio terminal command" placeholder="" aria-describedby="terminal-instructions terminal-hints">
-                  </form>
-                </div>
-                <div class="terminal-hints" id="terminal-hints" aria-label="Quick run commands">
-                  <span>QUICK RUN</span>
-                  <span class="terminal-help-text" id="terminal-instructions">Type <code>help</code> to explore commands</span>
-                  <button type="button" data-command="help">help</button>
-                  <button type="button" data-command="fastfetch">fastfetch</button>
-                  <button type="button" data-command="skills">skills</button>
-                  <button type="button" data-command="projects">projects</button>
-                  <button type="button" data-command="contact">contact</button>
-                  <button type="button" data-command="show">show</button>
-                </div>
-              </div>
-            </section>
+            <div class="portrait-frame">
+              <div class="portrait-glow" aria-hidden="true"></div>
+              <img class="hero-portrait" id="hero-photo" src="/assets/uploads/photo-d68944b15c611e99f717b273.jpg" alt="Md Rabbi Mia profile" fetchpriority="high">
+              <span class="portrait-index" aria-hidden="true">01 / PROFILE</span>
+            </div>
           </div>
         </div>
         <a class="scroll-cue" href="#about" aria-label="Scroll to About section"><span></span>SCROLL TO EXPLORE</a>
@@ -244,6 +226,42 @@
         </nav>
       </div>
     </footer>
+    <section class="terminal-shell" id="terminal-shell" aria-label="Interactive portfolio terminal" hidden>
+      <div class="profile-terminal">
+        <div class="terminal-titlebar">
+          <span class="terminal-dots"><i></i><i></i><i></i></span>
+          <span class="terminal-window-title">rabbi@portfolio: ~</span>
+          <span class="terminal-mode"><span class="terminal-live-dot"></span> PORTFOLIO SHELL</span>
+          <div class="terminal-window-controls">
+            <button class="terminal-window-button" id="terminal-maximize" type="button" aria-label="Maximize terminal" title="Maximize terminal">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.25" y="3.25" width="9.5" height="9.5" rx="1.25"></rect></svg>
+            </button>
+            <button class="terminal-window-button" id="terminal-minimize" type="button" aria-label="Minimize terminal" title="Minimize terminal">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"></path></svg>
+            </button>
+          </div>
+        </div>
+        <div class="terminal-output" id="terminal-output" role="log" aria-live="polite" aria-relevant="additions">
+          <form class="terminal-command-form" id="terminal-form">
+            <label class="terminal-prompt" for="terminal-input"><span class="prompt-bracket">[</span><span class="prompt-user">rabbi@portfolio</span><span class="prompt-path">~</span><span class="prompt-bracket">]</span><span class="prompt-symbol">$</span></label>
+            <input id="terminal-input" name="command" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Enter a portfolio terminal command" placeholder="" aria-describedby="terminal-instructions terminal-hints">
+          </form>
+        </div>
+        <div class="terminal-hints" id="terminal-hints" aria-label="Quick run commands">
+          <span>QUICK RUN</span>
+          <span class="terminal-help-text" id="terminal-instructions">Type <code>help</code> to explore commands</span>
+          <button type="button" data-command="help">help</button>
+          <button type="button" data-command="fastfetch">fastfetch</button>
+          <button type="button" data-command="skills">skills</button>
+          <button type="button" data-command="projects">projects</button>
+          <button type="button" data-command="contact">contact</button>
+          <button type="button" data-command="show">show</button>
+        </div>
+      </div>
+    </section>
+    <button class="terminal-launcher" id="terminal-launcher" type="button" aria-label="Open terminal" aria-controls="terminal-shell" aria-expanded="false" title="Open terminal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 7 5 5-5 5M12 17h7"></path></svg>
+    </button>
     <dialog class="social-dialog" id="social-dialog" aria-labelledby="social-dialog-title">
       <div class="social-dialog-top">
         <span aria-hidden="true"></span>

@@ -139,7 +139,7 @@ curl http://127.0.0.1:8012/api/health
 curl http://127.0.0.1:8012/api/portfolio
 ```
 
-The health endpoint should return `{"status":"ok"}`. Open the site through FastAPI; opening `frontend/index.html` directly bypasses API serving and metadata replacement.
+The health endpoint should return `{"status":"ok"}`. Open the site through FastAPI; opening `index.html` directly bypasses API serving and metadata replacement.
 
 ## Admin guide
 
@@ -207,7 +207,7 @@ Language preference is stored under `portfolio-language` in browser `localStorag
 | --- | --- |
 | Profile text, experience, projects, education | Admin dashboard / full editor |
 | Initial content and default schema | `backend/config.py` |
-| Public page structure or new sections | `frontend/index.html` and `frontend/js/app.js` |
+| Public page structure or new sections | `index.html` and `frontend/js/app.js` |
 | Public layout and responsive design | `frontend/css/style.css` |
 | Shared colours and theme styling | `frontend/css/theme.css` |
 | Theme behaviour | `frontend/js/theme.js` |
@@ -219,8 +219,8 @@ Language preference is stored under `portfolio-language` in browser `localStorag
 
 ```text
 portfolio-project/
+├── index.html                     # Public portfolio structure and metadata placeholders
 ├── frontend/
-│   ├── index.html                 # Public portfolio structure and metadata placeholders
 │   ├── admin.html                 # Login and profile settings dashboard
 │   ├── editor.html                # Full portfolio editor shell
 │   ├── css/
@@ -280,15 +280,9 @@ The session cookie is scoped to `/api/admin`. Login accepts JSON containing `use
 
 ## Docker
 
-### Current Dockerfile prerequisite
+### Image contents
 
-The current `Dockerfile` copies `backend/` and `frontend/`, but does not copy `inner-project/`. Because `server.py` mounts the Personal Cost Manager directory at startup, the container can fail with a missing-directory error.
-
-Before using the Docker workflow, add this line after the existing frontend copy instruction in `Dockerfile`:
-
-```dockerfile
-COPY inner-project /app/inner-project
-```
+The Dockerfile copies the root `index.html`, `backend/`, `frontend/`, and `inner-project/` into the image. The project dashboard directory is required because FastAPI mounts it at startup.
 
 ### Build and run
 
@@ -363,7 +357,7 @@ To restore into an existing container, stop it, copy your backup contents back t
 | Editing `config.py` does not change existing content | Saved JSON overrides the same top-level defaults. Update through the editor. |
 | New content stays English after switching languages | Add its translations to `frontend/js/translations.js`. |
 | Port `8012` is already in use | Stop the conflicting process or choose another Uvicorn host port; for Docker, change the host side of the port mapping. |
-| Docker exits with a missing project-directory error | Apply the `COPY inner-project /app/inner-project` prerequisite above and rebuild. |
+| Docker exits with a missing project-directory error | Confirm `inner-project/personal-cost-manager/` exists in the build context, then rebuild the image. |
 | CSS/JS changes are not visible | Hard-refresh the browser; review the asset query-string versions in the relevant HTML. Rebuild if using Docker. |
 | Saved JSON cannot be read | Check file permissions and JSON validity; restore a known-good backup if the file is malformed. |
 

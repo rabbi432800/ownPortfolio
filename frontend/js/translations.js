@@ -2,10 +2,17 @@
 
 window.PORTFOLIO_TRANSLATIONS = {
   DE: {
+    "View details": "Details anzeigen",
+    "Hide details": "Details ausblenden",
     "Home": "Start",
     "home": "Startseite",
     "Open navigation": "Navigation öffnen",
     "Close navigation": "Navigation schließen",
+    "Open terminal": "Terminal öffnen",
+    "Minimize terminal": "Terminal minimieren",
+    "Maximize terminal": "Terminal maximieren",
+    "Restore terminal": "Terminal wiederherstellen",
+    "NETWORKS · LINUX · SUPPORT": "NETZWERKE · LINUX · SUPPORT",
     "About": "Über mich",
     "Experience": "Erfahrung",
     "Skills": "Fähigkeiten",
@@ -277,10 +284,17 @@ window.PORTFOLIO_TRANSLATIONS = {
     "zsh: command not found: command\nType \"help\" to see available portfolio commands.": "zsh: Befehl nicht gefunden: command\nGib \"help\" ein, um verfügbare Portfolio-Befehle zu sehen."
   },
   BN: {
+    "View details": "বিস্তারিত দেখুন",
+    "Hide details": "বিস্তারিত বন্ধ করুন",
     "Home": "হোম",
     "home": "হোম",
     "Open navigation": "নেভিগেশন খুলুন",
     "Close navigation": "নেভিগেশন বন্ধ করুন",
+    "Open terminal": "টার্মিনাল খুলুন",
+    "Minimize terminal": "টার্মিনাল মিনিমাইজ করুন",
+    "Maximize terminal": "টার্মিনাল বড় করুন",
+    "Restore terminal": "টার্মিনাল আগের আকারে আনুন",
+    "NETWORKS · LINUX · SUPPORT": "নেটওয়ার্ক · Linux · সাপোর্ট",
     "About": "সম্পর্কে",
     "Experience": "অভিজ্ঞতা",
     "Skills": "দক্ষতা",

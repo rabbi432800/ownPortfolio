@@ -61,6 +61,12 @@ const escapeHtml = (value) =>
 const renderTags = (items) =>
   `<div class="tag-list">${items.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>`;
 
+const renderDetails = (content) => `
+  <details class="card-details">
+    <summary><span class="details-show">${escapeHtml(translateText("View details"))}</span><span class="details-hide">${escapeHtml(translateText("Hide details"))}</span><span class="details-chevron" aria-hidden="true">⌄</span></summary>
+    <div class="card-details-body">${content}</div>
+  </details>`;
+
 function renderPortfolio(data) {
   data = translatePortfolioData(data);
   document.title = `${data.display_name} | ${data.role}`;
@@ -114,8 +120,10 @@ function renderPortfolio(data) {
   });
   document.querySelector("#hero-role").textContent = data.role;
   document.querySelector("#hero-tagline").textContent = data.tagline;
-  document.querySelector("#hero-introduction").textContent = data.introduction;
   document.querySelector("#hero-location").textContent = data.location;
+  const heroPhoto = document.querySelector("#hero-photo");
+  heroPhoto.src = data.photo_path || "/assets/uploads/photo-d68944b15c611e99f717b273.jpg";
+  heroPhoto.alt = `${data.display_name} ${translateText("profile")}`;
   document.querySelectorAll("[data-name]").forEach((element) => {
     element.textContent = data.display_name;
   });
@@ -163,9 +171,9 @@ function renderPortfolio(data) {
             <div class="experience-meta"><span class="tag">${escapeHtml(job.type)}</span><span class="experience-period">${escapeHtml(job.period)}</span></div>
             <h3>${escapeHtml(job.role)}</h3>
             <h4>${escapeHtml(job.company)}</h4>
-            <p>${escapeHtml(job.description)}</p>
+            ${renderDetails(`<p>${escapeHtml(job.description)}</p>
             <ul class="check-list">${job.responsibilities.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-            ${renderTags(job.technologies)}
+            ${renderTags(job.technologies)}`)}
           </div>
         </article>`,
     )
@@ -177,8 +185,8 @@ function renderPortfolio(data) {
         <article class="skill-card">
           <div class="skill-card-top"><span class="skill-number">${String(index + 1).padStart(2, "0")}</span><span class="skill-symbol" aria-hidden="true">${["⌘", "⌁", "▤", "⌬"][index % 4]}</span></div>
           <h3>${escapeHtml(group.category)}</h3>
-          <p>${escapeHtml(group.description)}</p>
-          ${renderTags(group.items)}
+          ${renderDetails(`<p>${escapeHtml(group.description)}</p>
+          ${renderTags(group.items)}`)}
         </article>`,
     )
     .join("");
@@ -195,14 +203,14 @@ function renderPortfolio(data) {
           <div class="project-content">
             <span class="tag">${escapeHtml(project.status)}</span>
             <h3>${escapeHtml(project.title)}</h3>
-            <p>${escapeHtml(project.description)}</p>
+            ${renderDetails(`<p>${escapeHtml(project.description)}</p>
             <ul class="project-features">${project.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
             ${renderTags(project.stack)}
             ${
               project.link
                 ? `<a class="text-link project-link" href="${escapeHtml(project.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.link_label)} <span aria-hidden="true">↗</span></a>`
                 : '<span class="project-private-note">No public project link</span>'
-            }
+            }`)}
           </div>
         </article>`,
     )
@@ -215,8 +223,8 @@ function renderPortfolio(data) {
           <span class="education-period">${escapeHtml(item.period)}</span>
           <h4>${escapeHtml(item.qualification)}</h4>
           <p class="education-institution">${escapeHtml(item.institution)}</p>
-          <p>${escapeHtml(item.details)}</p>
-          <span class="education-result">${escapeHtml(item.result)}</span>
+          ${renderDetails(`<p>${escapeHtml(item.details)}</p>
+          <span class="education-result">${escapeHtml(item.result)}</span>`)}
         </article>`,
     )
     .join("");
@@ -228,7 +236,7 @@ function renderPortfolio(data) {
           <span class="training-symbol" aria-hidden="true">↗</span>
           <h4>${escapeHtml(item.name)}</h4>
           <p class="education-institution">${escapeHtml(item.provider)}</p>
-          <p>${escapeHtml(item.details)}</p>
+          ${renderDetails(`<p>${escapeHtml(item.details)}</p>`)}
         </article>`,
     )
     .join("");
@@ -288,9 +296,101 @@ function initializePortfolioTerminal(data) {
   const input = document.querySelector("#terminal-input");
   const output = document.querySelector("#terminal-output");
   const prompt = document.querySelector(".terminal-prompt");
+  const shell = document.querySelector("#terminal-shell");
+  const launcher = document.querySelector("#terminal-launcher");
+  const maximizeButton = document.querySelector("#terminal-maximize");
+  const minimizeButton = document.querySelector("#terminal-minimize");
+  const titlebar = document.querySelector(".terminal-titlebar");
   const commandHistory = [];
   let historyIndex = 0;
   let currentDirectory = "~";
+  let dragState = null;
+  let restoredPosition = null;
+
+  titlebar.addEventListener("pointerdown", (event) => {
+    if (
+      event.button !== 0 ||
+      event.target.closest("button") ||
+      shell.classList.contains("is-maximized")
+    ) {
+      return;
+    }
+
+    const bounds = shell.getBoundingClientRect();
+    dragState = {
+      pointerId: event.pointerId,
+      offsetX: event.clientX - bounds.left,
+      offsetY: event.clientY - bounds.top,
+    };
+    titlebar.setPointerCapture(event.pointerId);
+  });
+
+  titlebar.addEventListener("pointermove", (event) => {
+    if (!dragState || event.pointerId !== dragState.pointerId) return;
+    const maxLeft = Math.max(0, window.innerWidth - shell.offsetWidth);
+    const maxTop = Math.max(0, window.innerHeight - shell.offsetHeight);
+    const left = Math.min(maxLeft, Math.max(0, event.clientX - dragState.offsetX));
+    const top = Math.min(maxTop, Math.max(0, event.clientY - dragState.offsetY));
+    shell.style.left = `${left}px`;
+    shell.style.top = `${top}px`;
+    shell.style.right = "auto";
+    shell.style.bottom = "auto";
+  });
+
+  const stopDragging = (event) => {
+    if (dragState?.pointerId === event.pointerId) dragState = null;
+  };
+  titlebar.addEventListener("pointerup", stopDragging);
+  titlebar.addEventListener("pointercancel", stopDragging);
+
+  const setTerminalOpen = (open) => {
+    shell.hidden = !open;
+    launcher.setAttribute("aria-expanded", String(open));
+    const actionLabel = translateText(open ? "Minimize terminal" : "Open terminal");
+    launcher.setAttribute("aria-label", actionLabel);
+    launcher.title = actionLabel;
+    if (open) {
+      input.focus({ preventScroll: true });
+    } else {
+      shell.classList.remove("is-maximized");
+      shell.style.left = "";
+      shell.style.top = "";
+      shell.style.right = "";
+      shell.style.bottom = "";
+      restoredPosition = null;
+      maximizeButton.setAttribute("aria-pressed", "false");
+      maximizeButton.setAttribute("aria-label", translateText("Maximize terminal"));
+      maximizeButton.title = translateText("Maximize terminal");
+      launcher.focus({ preventScroll: true });
+    }
+  };
+
+  launcher.addEventListener("click", () => setTerminalOpen(shell.hidden));
+  minimizeButton.addEventListener("click", () => setTerminalOpen(false));
+  maximizeButton.addEventListener("click", () => {
+    const maximized = !shell.classList.contains("is-maximized");
+    if (maximized) {
+      const bounds = shell.getBoundingClientRect();
+      restoredPosition = { left: bounds.left, top: bounds.top };
+      shell.style.left = "";
+      shell.style.top = "";
+      shell.style.right = "";
+      shell.style.bottom = "";
+    } else if (restoredPosition) {
+      shell.style.left = `${restoredPosition.left}px`;
+      shell.style.top = `${restoredPosition.top}px`;
+      shell.style.right = "auto";
+      shell.style.bottom = "auto";
+      restoredPosition = null;
+    }
+    shell.classList.toggle("is-maximized", maximized);
+    maximizeButton.setAttribute("aria-pressed", String(maximized));
+    maximizeButton.setAttribute(
+      "aria-label",
+      translateText(maximized ? "Restore terminal" : "Maximize terminal"),
+    );
+    maximizeButton.title = translateText(maximized ? "Restore terminal" : "Maximize terminal");
+  });
 
   const clearTerminal = () => {
     output.replaceChildren(form);
