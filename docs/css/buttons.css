@@ -1,0 +1,621 @@
+/* Shared ice-blue controls with an asymmetric sculpted silhouette. */
+:root {
+  --control-edge: rgba(137, 192, 213, .27);
+  --control-ink: #d6e7f1;
+  --control-surface: linear-gradient(125deg, #1a2a37, #14212e 65%, #203443);
+  --control-hover: linear-gradient(125deg, #223b49, #193040 65%, #2a4757);
+  --control-shadow: inset 0 1px 0 rgba(232, 249, 255, .09), 0 3px 9px rgba(0, 0, 0, .12);
+  --control-accent: #92deeb;
+  --control-primary: linear-gradient(125deg, #b0e7e3, #91ccdf);
+  --control-primary-hover: linear-gradient(125deg, #c3eeea, #a5dbea);
+  --control-primary-ink: #102c38;
+  --control-ring: #90dcec;
+  --control-danger: #f5b1bd;
+  --control-danger-surface: linear-gradient(145deg, #38252e, #291f2b);
+}
+:root[data-theme="light"] {
+  --control-edge: rgba(51, 103, 125, .25);
+  --control-ink: #284e61;
+  --control-surface: linear-gradient(155deg, #ffffff, #eaf2f5);
+  --control-hover: linear-gradient(155deg, #f5fcff, #dbeaf1);
+  --control-shadow: inset 0 1px 0 #fff, 0 3px 9px rgba(34, 73, 91, .07);
+  --control-accent: #235c78;
+  --control-primary: linear-gradient(125deg, #24677b, #345d87);
+  --control-primary-hover: linear-gradient(125deg, #1c586b, #284d72);
+  --control-primary-ink: #ffffff;
+  --control-ring: #246c8a;
+  --control-danger: #9b3049;
+  --control-danger-surface: linear-gradient(145deg, #fff5f7, #f4e6ed);
+}
+
+/* Include link/label controls and dynamically generated editor buttons. */
+:root:is([data-theme], :not([data-theme])) body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+  .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+  :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top) {
+  border: 1px solid var(--control-edge);
+  border-radius: 16px 5px 16px 5px;
+  color: var(--control-ink);
+  background: var(--control-surface);
+  box-shadow: var(--control-shadow);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease,
+    color .2s ease, transform .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root:is([data-theme], :not([data-theme])) body :is(.button-primary, .primary-button, .terminal-launcher,
+  .language-switcher button[aria-pressed="true"]) {
+  border-color: transparent;
+  color: var(--control-primary-ink);
+  background: var(--control-primary);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 4px 14px rgba(38,113,147,.14);
+}
+
+/* Small controls retain their purpose and compact dimensions. */
+:root:is([data-theme], :not([data-theme])) body :is(.language-switcher button, .terminal-window-button,
+  .terminal-hints button, .editor-move-button, .editor-drag-handle,
+  .social-dialog-copy) { border-radius: 9px 3px 9px 3px; }
+:root:is([data-theme], :not([data-theme])) body .language-switcher button:not([aria-pressed="true"]) {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--theme-muted);
+}
+:root:is([data-theme], :not([data-theme])) body .terminal-launcher { border-radius: 19px 7px 19px 7px; }
+:root:is([data-theme], :not([data-theme])) body .social-dialog-close { border-radius: 9px 3px 9px 3px; }
+:root:is([data-theme], :not([data-theme])) body .editor-remove-button {
+  color: var(--control-danger);
+  background: var(--control-danger-surface);
+  border-color: color-mix(in srgb, var(--control-danger) 28%, transparent);
+}
+:root:is([data-theme], :not([data-theme])) body .back-top { display: inline-flex; align-items: center; justify-content: center; padding: 7px 11px; }
+
+@media (hover: hover) {
+  :root:is([data-theme], :not([data-theme])) body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+    .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+    :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top):not(:disabled):hover {
+    color: var(--control-accent);
+    background: var(--control-hover);
+    border-color: color-mix(in srgb, var(--control-ring) 65%, transparent);
+    box-shadow: var(--control-shadow), 0 5px 16px rgba(38,113,147,.1);
+    transform: translateY(-1px);
+  }
+  :root:is([data-theme], :not([data-theme])) body :is(.button-primary, .primary-button, .terminal-launcher,
+    .language-switcher button[aria-pressed="true"]):not(:disabled):hover {
+    color: var(--control-primary-ink);
+    background: var(--control-primary-hover);
+    border-color: transparent;
+  }
+  :root:is([data-theme], :not([data-theme])) body .editor-remove-button:not(:disabled):hover {
+    color: var(--control-danger);
+    background: var(--control-danger-surface);
+    border-color: var(--control-danger);
+  }
+}
+:root:is([data-theme], :not([data-theme])) body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+  .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+  :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top):focus-visible,
+:root:is([data-theme], :not([data-theme])) body .upload-button:focus-within {
+  outline: 2px solid var(--control-ring);
+  outline-offset: 4px;
+}
+:root:is([data-theme], :not([data-theme])) body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+  .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+  :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top):not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,.12);
+}
+:root:is([data-theme], :not([data-theme])) body button:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:is([data-theme], :not([data-theme])) body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+    .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+    :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top) {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* The dashboard has an existing ID-based sign-out rule. */
+:root body #logout-button {
+  color: var(--control-ink);
+  border-color: var(--control-edge);
+  background: var(--control-surface);
+  box-shadow: var(--control-shadow);
+}
+@media (hover: hover) {
+  :root body #logout-button:not(:disabled):hover {
+    color: var(--control-accent);
+    border-color: var(--control-ring);
+    background: var(--control-hover);
+  }
+}
+
+/* Real bevels on supporting browsers; asymmetric soft corners are the fallback.
+   No clipping: keyboard outlines and upload-label focus rings stay visible. */
+@supports (corner-shape: bevel) {
+  :root:is([data-theme], :not([data-theme])) body :is(button, .button,
+    .primary-button, .secondary-button, .upload-button, .admin-return-button,
+    :where(.navigation) .nav-cta, :where(.card-details) > summary,
+    :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top) {
+    corner-shape: round bevel round bevel;
+  }
+}
+
+/* Terminal launcher: a quiet live signal with a travelling edge light. */
+@property --launcher-orbit {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+:root body #terminal-launcher {
+  isolation: isolate;
+  overflow: visible;
+  animation: launcher-breathe 4s ease-in-out infinite;
+}
+:root body #terminal-launcher::before {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--control-edge);
+  border-radius: inherit;
+  corner-shape: inherit;
+  content: '';
+  pointer-events: none;
+}
+@supports (mask-composite: exclude) {
+  :root body #terminal-launcher::before {
+    border: 0;
+    padding: 1px;
+    background: conic-gradient(from var(--launcher-orbit), transparent 0deg 230deg,
+      color-mix(in srgb, var(--control-ring) 15%, transparent) 275deg,
+      var(--control-ring) 320deg, transparent 355deg);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: launcher-orbit 6s linear infinite;
+  }
+}
+:root body #terminal-launcher .terminal-cursor {
+  animation: launcher-cursor 1.6s steps(1, end) infinite;
+}
+:root body #terminal-launcher[aria-expanded="true"] { animation: none; }
+:root body #terminal-launcher[aria-expanded="true"] .terminal-cursor {
+  animation: none;
+}
+:root body #terminal-launcher:focus-visible { outline-offset: 8px; }
+@keyframes launcher-orbit { to { --launcher-orbit: 360deg; } }
+@keyframes launcher-breathe {
+  0%, 100% { box-shadow: inset 0 1px rgba(255,255,255,.24), 0 4px 16px rgba(38,113,147,.15); }
+  50% { box-shadow: inset 0 1px rgba(255,255,255,.24), 0 6px 24px rgba(38,113,147,.25), 0 0 20px color-mix(in srgb, var(--control-ring) 13%, transparent); }
+}
+@keyframes launcher-cursor { 0%, 65%, 100% { opacity: 1; } 66%, 99% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) {
+  :root body #terminal-launcher,
+  :root body #terminal-launcher::before,
+  :root body #terminal-launcher .terminal-cursor { animation: none; }
+}
+
+/* Circular terminal launcher; other controls keep their sculpted corners. */
+:root body #terminal-launcher {
+  border-radius: 50%;
+  corner-shape: round;
+}
+
+/* Compact, understated home actions; all other controls retain their theme. */
+:root body .hero-actions { gap: 10px; margin-top: 23px; }
+:root body .hero-actions .button {
+  flex: 0 1 auto;
+  min-height: 37px;
+  padding: 7px 13px;
+  border-radius: 11px 4px 11px 4px;
+  border-color: var(--control-edge);
+  color: var(--control-ink);
+  background: color-mix(in srgb, var(--theme-panel) 60%, transparent);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+:root body .hero-actions .button-primary {
+  color: var(--control-accent);
+  border-color: color-mix(in srgb, var(--control-ring) 35%, transparent);
+  background: color-mix(in srgb, var(--control-ring) 8%, var(--theme-panel));
+}
+:root body .hero-actions .button-secondary { background: transparent; }
+@media (hover: hover) {
+  :root body .hero-actions .button:not(:disabled):hover {
+    color: var(--control-accent);
+    background: color-mix(in srgb, var(--control-ring) 12%, var(--theme-panel));
+    border-color: color-mix(in srgb, var(--control-ring) 50%, transparent);
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body .hero-actions .button:not(:disabled):hover { transform: none; }
+}
+
+/* Theme control uses only its sun/moon icon; accessible labels remain in HTML. */
+:root body .theme-toggle {
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  gap: 0;
+  flex: 0 0 38px;
+}
+:root body .theme-toggle [data-theme-label] { display: none; }
+:root body .theme-toggle [data-theme-icon] { font-size: 20px; line-height: 1; }
+
+/* Compact header proportions: labels and controls share one visual rhythm. */
+:root body .site-header .navigation { gap: clamp(10px, 1.4vw, 20px); }
+:root body .site-header .language-switcher {
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px 5px 12px 5px;
+  border-color: var(--control-edge);
+  background: color-mix(in srgb, var(--theme-panel) 65%, transparent);
+}
+:root body .site-header .language-switcher button {
+  min-width: 30px;
+  min-height: 26px;
+  padding: 4px 7px;
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .025em;
+  border-radius: 7px 3px 7px 3px;
+  box-shadow: none;
+}
+:root body .site-header .theme-toggle {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  flex-basis: 34px;
+  padding: 0;
+  box-shadow: none;
+}
+:root body .site-header .theme-toggle [data-theme-icon] { font-size: 18px; }
+:root body .site-header .navigation .nav-cta {
+  min-height: 34px;
+  padding: 6px 11px;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.5;
+  border-radius: 11px 4px 11px 4px;
+  box-shadow: none;
+  white-space: nowrap;
+}
+/* Highlight follows the surface, keeping primary/secondary/danger distinctions. */
+:root body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+  .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+  :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top) {
+  background-size: 160% 100%;
+  background-position: 0% 50%;
+  transition: background .22s ease, background-position .3s ease, border-color .22s ease,
+    box-shadow .22s ease, color .22s ease, transform .22s ease;
+}
+@media (hover: hover) {
+  :root body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+    .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+    :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top):not(:disabled):hover {
+    background-size: 160% 100%;
+    background-position: 100% 50%;
+  }
+  :root body .site-header :is(.theme-toggle, .language-switcher button, .navigation .nav-cta):hover {
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--control-ring) 18%, transparent);
+  }
+}
+/* Touch users keep comfortable targets without enlarging desktop controls. */
+@media (pointer: coarse) {
+  :root body .site-header .language-switcher button { min-width: 42px; min-height: 42px; }
+  :root body .site-header .theme-toggle { width: 44px; height: 44px; min-height: 44px; flex-basis: 44px; }
+  :root body .site-header .navigation .nav-cta { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body :is(button, .button, .primary-button, .secondary-button, .upload-button,
+    .admin-return-button, :where(.navigation) .nav-cta, :where(.card-details) > summary,
+    :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top) {
+    transition: none;
+  }
+}
+
+/* Soft, balanced corners replace the earlier asymmetric silhouette. */
+:root:is([data-theme], :not([data-theme])) body :is(button, .button,
+  .primary-button, .secondary-button, .upload-button, .admin-return-button,
+  :where(.navigation) .nav-cta, :where(.card-details) > summary,
+  :where(.project-menu) > summary, :where(.project-dashboard) main > a, .back-top),
+:root body .hero-actions .button,
+:root body .site-header .navigation .nav-cta {
+  border-radius: 10px;
+  corner-shape: round;
+}
+:root body .site-header .language-switcher { border-radius: 11px; }
+:root body .site-header .language-switcher button,
+:root:is([data-theme], :not([data-theme])) body :is(.language-switcher button,
+  .terminal-window-button, .terminal-hints button, .editor-move-button,
+  .editor-drag-handle, .social-dialog-copy) { border-radius: 7px; }
+:root body #terminal-launcher { border-radius: 50%; corner-shape: round; }
+:root:is([data-theme], :not([data-theme])) body .social-dialog-close { border-radius: 50%; }
+
+/* Social links share the control accents without losing their compact layout. */
+:root body :is(.footer-socials a, a.contact-method) {
+  transition: transform .2s ease, border-color .2s ease, background .2s ease,
+    box-shadow .2s ease, color .2s ease;
+}
+:root body a.contact-method > :is(span, b),
+:root body .footer-socials a svg { transition: transform .2s ease, color .2s ease; }
+:root body :is(.footer-socials a, a.contact-method):focus-visible {
+  outline: 2px solid var(--control-ring);
+  outline-offset: 4px;
+  border-color: var(--control-ring);
+}
+@media (hover: hover) {
+  :root body :is(.footer-socials a, a.contact-method):hover {
+    transform: translateY(-3px);
+    color: var(--control-accent);
+    border-color: var(--control-ring);
+    background: color-mix(in srgb, var(--control-ring) 10%, var(--theme-panel));
+    box-shadow: 0 6px 18px color-mix(in srgb, var(--control-ring) 12%, transparent);
+  }
+  :root body .footer-socials a:hover svg { transform: scale(1.12); }
+  :root body a.contact-method:hover > span { color: var(--control-accent); transform: scale(1.05); }
+  :root body a.contact-method:hover > b { color: var(--control-accent); transform: translate(2px, -2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body :is(.footer-socials a, a.contact-method),
+  :root body a.contact-method > :is(span, b),
+  :root body .footer-socials a svg { transition: none; }
+  :root body :is(.footer-socials a, a.contact-method):hover,
+  :root body a.contact-method:hover > :is(span, b),
+  :root body .footer-socials a:hover svg { transform: none; }
+}
+
+/* Compact language dropdown, with a seamless pointer path into its panel. */
+.language-dropdown { position: relative; flex: 0 0 auto; }
+:root body .site-header .language-trigger { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 6px 10px; font-size: 10px; line-height: 1.5; cursor: pointer; box-shadow: none; }
+.language-trigger svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.language-caret { transition: transform .2s; }
+.language-trigger[aria-expanded="true"] .language-caret { transform: rotate(180deg); }
+.language-options { position: absolute; z-index: 30; top: calc(100% + 8px); right: 0; width: 170px; padding: 6px; border: 1px solid var(--control-edge); border-radius: 13px; background: color-mix(in srgb, var(--theme-panel) 96%, transparent); backdrop-filter: blur(18px); box-shadow: 0 12px 30px rgba(0,0,0,.15); animation: language-reveal .16s ease; }
+.language-options::before { position: absolute; top: -10px; left: 0; right: 0; height: 10px; content: ''; }
+:root body .site-header .language-options button { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 36px; padding: 8px 10px; margin: 2px 0; border-color: transparent; border-radius: 8px; background: transparent; box-shadow: none; font-size: 12px; cursor: pointer; }
+.language-options small { font-size: 9px; opacity: .65; letter-spacing: .06em; }
+:root body .site-header .language-options button[aria-pressed="true"] { color: var(--control-accent); background: color-mix(in srgb, var(--control-ring) 12%, transparent); }
+@keyframes language-reveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@media (min-width: 761px) { .site-header .navigation { position: relative; } }
+.nav-hover-line { position: absolute; top: 0; left: 0; height: 2px; border-radius: 999px; background: linear-gradient(90deg, var(--control-accent), var(--control-ring)); pointer-events: none; opacity: 0; transition: transform .2s cubic-bezier(.2,.7,.2,1), width .2s cubic-bezier(.2,.7,.2,1), opacity .12s ease; box-shadow: 0 2px 8px color-mix(in srgb, var(--control-ring) 20%, transparent); }
+@media (max-width: 760px) {
+  .language-dropdown { align-self: flex-start; margin: 8px 10px; }
+  .language-options { left: 0; right: auto; }
+}
+@media (pointer: coarse) {
+  :root body .site-header .language-trigger, :root body .site-header .language-options button { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-hover-line, .language-caret { transition: none; }
+  .language-options { animation: none; }
+}
+
+/* Bare globe launcher; language names remain available inside the dropdown. */
+:root body .site-header .language-trigger {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--theme-muted);
+  background: transparent;
+  box-shadow: none;
+}
+:root body .site-header .language-trigger svg { width: 20px; height: 20px; transition: transform .55s cubic-bezier(.22,.68,.25,1); }
+:root body .site-header .language-trigger[aria-expanded="true"] { color: var(--control-accent); }
+@media (hover: hover) {
+  :root body .site-header .language-trigger:not(:disabled):hover {
+    color: var(--control-accent);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    transform: none;
+  }
+  :root body .site-header .language-trigger:hover svg { transform: rotate(180deg); }
+}
+@media (pointer: coarse) {
+  :root body .site-header .language-trigger { width: 44px; height: 44px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body .site-header .language-trigger svg { transition: none; }
+  :root body .site-header .language-trigger:hover svg { transform: none; }
+}
+
+/* Theme toggle matches the bare globe control across all pages. */
+:root:is([data-theme], :not([data-theme])) body .theme-toggle {
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  color: var(--theme-muted);
+}
+:root body .theme-toggle [data-theme-icon] {
+  display: inline-block;
+  color: inherit;
+  transform: rotate(0deg);
+  transition: transform .55s cubic-bezier(.22,.68,.25,1);
+}
+@media (hover: hover) {
+  :root:is([data-theme], :not([data-theme])) body .theme-toggle:not(:disabled):hover {
+    border: 0;
+    color: var(--control-accent);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+  :root body .theme-toggle:hover [data-theme-icon] { transform: rotate(180deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body .theme-toggle [data-theme-icon] { transition: none; }
+  :root body .theme-toggle:hover [data-theme-icon] { transform: none; }
+}
+
+/* Matched line icons cross-fade when the theme changes; the control stays bare. */
+:root body .theme-toggle [data-theme-icon] {
+  position: relative;
+  display: block;
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  line-height: 0;
+  transition: transform .65s cubic-bezier(.22,.68,.25,1), filter .25s ease;
+}
+.theme-toggle [data-theme-icon] svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: rotate(-40deg) scale(.65);
+  transition: opacity .22s ease, transform .38s cubic-bezier(.22,.68,.25,1);
+}
+:root body .theme-toggle [data-next-theme="light"] .theme-sun,
+:root body .theme-toggle [data-next-theme="dark"] .theme-moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+:root body .theme-toggle [data-next-theme="light"] { color: #e5c78b; }
+:root body .theme-toggle [data-next-theme="dark"] { color: #476780; }
+@media (hover: hover) {
+  :root body .theme-toggle:hover [data-theme-icon] {
+    transform: rotate(180deg);
+    filter: drop-shadow(0 0 5px color-mix(in srgb, currentColor 28%, transparent));
+  }
+}
+:root body .theme-toggle:focus-visible [data-theme-icon] {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, currentColor 25%, transparent));
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body .theme-toggle [data-theme-icon], .theme-toggle [data-theme-icon] svg { transition: none; }
+  :root body .theme-toggle:hover [data-theme-icon] { transform: none; }
+}
+
+/* Rest shows the current theme; hover/focus previews the theme a click selects. */
+:root body .theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+:root body .theme-toggle [data-theme-icon] { margin: 0; transform-origin: 50% 50%; }
+:root body .theme-toggle [data-theme-icon] svg { transform-origin: 50% 50%; }
+:root body .theme-toggle [data-next-theme] :is(.theme-sun, .theme-moon) {
+  opacity: 0;
+  transform: rotate(-45deg) scale(.65);
+}
+:root[data-theme="dark"] body .theme-toggle [data-theme-icon] { color: #b7cde3; }
+:root[data-theme="light"] body .theme-toggle [data-theme-icon] { color: #9b671d; }
+:root[data-theme="dark"] body .theme-toggle [data-theme-icon] .theme-moon,
+:root[data-theme="light"] body .theme-toggle [data-theme-icon] .theme-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+@media (hover: hover) {
+  :root body .theme-toggle:hover [data-theme-icon] { transform: rotate(360deg); }
+  :root[data-theme="dark"] body .theme-toggle:hover [data-theme-icon] { color: #e5c78b; }
+  :root[data-theme="light"] body .theme-toggle:hover [data-theme-icon] { color: #476780; }
+  :root[data-theme="dark"] body .theme-toggle:hover [data-theme-icon] .theme-moon,
+  :root[data-theme="light"] body .theme-toggle:hover [data-theme-icon] .theme-sun {
+    opacity: 0;
+    transform: rotate(45deg) scale(.65);
+  }
+  :root[data-theme="dark"] body .theme-toggle:hover [data-theme-icon] .theme-sun,
+  :root[data-theme="light"] body .theme-toggle:hover [data-theme-icon] .theme-moon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+:root[data-theme="dark"] body .theme-toggle:focus-visible [data-theme-icon] .theme-moon,
+:root[data-theme="light"] body .theme-toggle:focus-visible [data-theme-icon] .theme-sun { opacity: 0; }
+:root[data-theme="dark"] body .theme-toggle:focus-visible [data-theme-icon] .theme-sun,
+:root[data-theme="light"] body .theme-toggle:focus-visible [data-theme-icon] .theme-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  :root body .theme-toggle:hover [data-theme-icon] { transform: none; }
+}
+
+/* Quieter terminal launcher with a translucent, theme-matched surface. */
+:root body #terminal-launcher {
+  color: var(--control-accent);
+  border-color: color-mix(in srgb, var(--control-ring) 32%, transparent);
+  background: color-mix(in srgb, var(--theme-panel) 68%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+:root body #terminal-launcher::before { opacity: .55; }
+@media (hover: hover) {
+  :root body #terminal-launcher:not(:disabled):hover {
+    color: var(--control-accent);
+    border-color: color-mix(in srgb, var(--control-ring) 48%, transparent);
+    background: color-mix(in srgb, var(--theme-panel) 82%, transparent);
+  }
+}
+@keyframes launcher-breathe {
+  0%, 100% { box-shadow: inset 0 1px rgba(255,255,255,.05), 0 3px 12px rgba(38,113,147,.07); }
+  50% { box-shadow: inset 0 1px rgba(255,255,255,.08), 0 4px 18px rgba(38,113,147,.12); }
+}
+
+/* Repository CTA stays quiet until interaction. */
+:root body #github-link {
+  color: var(--control-ink);
+  border: 1px solid var(--control-edge);
+  background: transparent;
+  box-shadow: none;
+}
+@media (hover: hover) {
+  :root body #github-link:hover {
+    color: var(--control-accent);
+    border-color: color-mix(in srgb, var(--control-ring) 50%, transparent);
+    background: color-mix(in srgb, var(--control-ring) 8%, transparent);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--control-ring) 7%, transparent);
+    transform: translateY(-1px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root body #github-link:hover { transform: none; }
+}
+
+/* Back-to-top is a compact up-arrow control, never a stretched grid item. */
+:root:is([data-theme], :not([data-theme])) body .back-top {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  justify-self: end;
+  grid-column: -2 / -1;
+  grid-row: 1;
+  line-height: 0;
+}
+.back-top svg { display: block; width: 19px; height: 19px; }
+
+/* Email action uses the same quiet treatment as the GitHub CTA. */
+:root body #contact-form .form-submit {
+  color: var(--control-ink);
+  border: 1px solid var(--control-edge);
+  background: var(--control-surface);
+  box-shadow: none;
+}
+@media (hover: hover) {
+  :root body #contact-form .form-submit:not(:disabled):hover {
+    color: var(--control-accent);
+    border-color: color-mix(in srgb, var(--control-ring) 50%, transparent);
+    background: var(--control-hover);
+    box-shadow: none;
+  }
+}

@@ -2,14 +2,16 @@
   "display_name": "Md Rabbi Mia",
   "formal_name": "Md Rabbi Mia",
   "role": "NOC Engineer | Linux & Network Operations",
-  "tagline": "Keeping networks reliable. Solving technical problems. Building useful tools.",
+  "tagline": "Behind every reliable connection is a thoughtfully solved problem.",
   "location": "Bangladesh",
   "email": "mdrabbimia432800@gmail.com",
   "github": "https://github.com/rabbi432800",
   "linkedin": "https://www.linkedin.com/login/",
+  "whatsapp": "https://wa.me/8801774538595",
   "facebook": "https://www.facebook.com/sakib.shuvo.92",
   "cv_path": "",
-  "photo_path": "./assets/uploads/photo-58bff5994ddacf705e1c9f27.jpg",
+  "photo_path": "./assets/uploads/photo-fbb2711d506380eed9ab05cf.png",
+  "show_logo": false,
   "logo_path": "./assets/uploads/logo-d94c528a4fe4d2e06cb63ee9.jpg",
   "logo_dark_path": "./assets/uploads/logo-dark-bfbcb0ff0b2e14d811371eb5.jpg",
   "logo_light_path": "./assets/uploads/logo-light-3aede202fdae96ff150be180.jpg",
@@ -131,6 +133,27 @@
   ],
   "projects": [
     {
+      "title": "Personal Portfolio",
+      "category": "Portfolio Website",
+      "status": "Live Demo",
+      "description": "My personal portfolio presenting network operations experience, technical skills, and practical projects, with a FastAPI backend and a separate GitHub Pages demo.",
+      "features": [
+        "Responsive layout with dark and light themes",
+        "English, German, and Bengali language support",
+        "Private admin panel for content and image updates",
+        "Interactive terminal and expandable project cards"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python",
+        "FastAPI"
+      ],
+      "link": "https://github.com/rabbi432800/ownPortfolio",
+      "link_label": "View on GitHub"
+    },
+    {
       "title": "Monthly Cost Management",
       "category": "Personal Project",
       "status": "In Development",
@@ -212,6 +235,9 @@
   ],
   "education": [
     {
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
       "institution": "Prime University",
       "qualification": "BSc in Computer Science and Engineering",
       "period": "Spring 2026 – Present",
@@ -219,13 +245,19 @@
       "details": "Undergraduate study in Computer Science and Engineering."
     },
     {
-      "institution": "Institution name to confirm",
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
+      "institution": "Jashore Polytechnic Institute, Jashore.",
       "qualification": "Diploma in Computer Technology",
       "period": "August 2019 – December 2023",
       "result": "CGPA 3.68 / 4.00",
       "details": "Diploma-level study in computer technology."
     },
     {
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
       "institution": "Shimuldair M.L. High School",
       "qualification": "Secondary School Certificate (SSC)",
       "period": "2019",
@@ -235,19 +267,36 @@
   ],
   "training": [
     {
-      "name": "CCNA Fundamentals & Linux",
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
+      "name": "CCNA Fundamentals",
       "provider": "West Tech IT",
-      "details": "Training in networking fundamentals and Linux. No certification is claimed."
+      "details": "Training in networking fundamentals. No certification is claimed."
     },
     {
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
+      "name": "Linux Fundamentals",
+      "provider": "West Tech IT",
+      "details": "Practical training in Linux fundamentals. No certification is claimed."
+    },
+    {
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
       "name": "Computer Service & Hardware Technician",
       "provider": "Technical Training Centre (TTC), Jessore",
       "details": "Technical training in computer hardware and servicing."
     },
     {
-      "name": "German Language Course — B1 Level",
+      "location_url": "",
+      "website_url": "",
+      "facebook_url": "",
+      "name": "German Language Course — B1 Level (In progress)",
       "provider": "Course provider to confirm",
-      "details": "German language learning. No external examination certificate is claimed."
+      "details": "Currently studying German at B1 level. Course in progress; no completed course or external examination certificate is claimed."
     }
   ],
   "knowledge_sharing": [

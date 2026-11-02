@@ -67,13 +67,79 @@ const renderDetails = (content) => `
     <div class="card-details-body">${content}</div>
   </details>`;
 
+
+const renderLearningIcon = (title, education = false, watermarkOnly = false) => {
+  if (!education && /CCNA/i.test(title)) {
+    const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3v7m0-7-3 3m3-3 3 3M16 29v-7m0 7-3-3m3 3 3-3M3 16h7m-7 0 3-3m-3 3 3 3M29 16h-7m7 0-3-3m3 3-3 3"/><rect x="9" y="10" width="14" height="12" rx="3"/><path d="M12 14h8M12 18h3"/><circle cx="19" cy="18" r=".7" fill="currentColor" stroke="none"/></svg>`;
+    return `${watermarkOnly ? "" : `<span class="learning-icon ccna-icon" aria-hidden="true">${icon}</span>`}<span class="learning-watermark" aria-hidden="true">${icon}</span>`;
+  }
+  if (!education && /linux/i.test(title)) {
+    const logo = '<img src="./assets/technologies/linux.svg" alt="" width="24" height="24" aria-hidden="true">';
+    return `${watermarkOnly ? "" : `<span class="learning-icon" aria-hidden="true">${logo}</span>`}<span class="learning-watermark" aria-hidden="true">${logo}</span>`;
+  }
+  const paths = education
+    ? '<path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 12v5c3 2 7 2 10 0v-5M21 9v7"/>'
+    : /database|billing|oracle|sql|datenbank|ডেটাবেস|বিলিং/i.test(title)
+      ? '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/>'
+    : /automation|monitor|appointment|automatis|অটোমেশন|অটোমেশন/i.test(title)
+      ? '<path d="m13 2-8 12h6l-1 8 9-13h-6l1-7Z"/>'
+    : /development|html|css|javascript|python|fastapi|code|entwicklung|ডেভেলপ|উন্নয়ন/i.test(title)
+      ? '<path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/>'
+    : /cost|expense|finance|খরচ|ব্যয়/i.test(title)
+      ? '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2m-8 4h2m4 0h2M8 18h2m4 0h2"/>'
+    : /github/i.test(title)
+      ? '<path d="M9 19c-5 1-5-3-7-3m14 6v-4c0-1-.3-2-1-2 4-.5 6-2 6-6 0-1.5-.5-3-1.5-4 .3-1 .3-2 0-3-2 0-3 1-4 1-2-.5-4-.5-6 0-1-1-2-1-4-1-.3 1-.3 2 0 3C4.5 7 4 8.5 4 10c0 4 2 5.5 6 6-.7.5-1 1-1 2v4"/>'
+    : /mail|contact|যোগাযোগ/i.test(title)
+      ? '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'
+    : /CCNA|Linux|network|netzwerk|নেটওয়ার্ক/i.test(title)
+      ? '<rect x="8" y="3" width="8" height="6" rx="1.5"/><path d="M12 9v5M5 14h14M5 14v3M19 14v3"/><rect x="2" y="17" width="6" height="4" rx="1"/><rect x="16" y="17" width="6" height="4" rx="1"/>'
+      : /B1|German|Deutsch|language|জার্মান|ভাষা/i.test(title)
+        ? '<path d="M4 4h16v12H9l-5 4V4Z"/><path d="M8 8h8M8 12h5"/>'
+        : '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4M10 10h4v4h-4z"/>';
+  const svg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+  return `${watermarkOnly ? "" : `<span class="learning-icon" aria-hidden="true">${svg}</span>`}<span class="learning-watermark" aria-hidden="true">${svg}</span>`;
+};
+
+const technologyHighlights = [{"value": "Networking", "label": "Network Operations"}, {"value": "Linux", "label": "Server Operations"}, {"value": "Oracle Database", "label": "SQL & Data"}, {"value": "HTML", "label": "Web Structure"}, {"value": "CSS", "label": "Interface Styling"}, {"value": "JavaScript", "label": "Web Interactions"}, {"value": "Python", "label": "Scripting & Tools"}, {"value": "FastAPI", "label": "Backend APIs"}];
+
+const highlightLogoPaths = {
+  "Networking": "./assets/technologies/networking.svg",
+  "Linux": "./assets/technologies/linux.svg",
+  "Oracle Database": "./assets/technologies/oracle.svg",
+  "HTML": "./assets/technologies/html5.svg",
+  "CSS": "./assets/technologies/css3.svg",
+  "JavaScript": "./assets/technologies/javascript.svg",
+  "Python": "./assets/technologies/python.svg",
+  "FastAPI": "./assets/technologies/fastapi.svg"
+};
+
+
+const renderInstituteLinks = (item) => {
+  const icons = {
+    location_url: '<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+    website_url: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18Z"/>',
+    facebook_url: '<path d="M14 21v-8h3l.5-4H14V7c0-1.2.5-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8"/>',
+  };
+  return `<div class="institute-links">${Object.entries(icons).map(([field, path]) => {
+    const label = translateText({location_url: "Location", website_url: "Website", facebook_url: "Facebook"}[field]);
+    const icon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
+    let valid = false;
+    try { const url = new URL(item[field]); valid = ["http:", "https:"].includes(url.protocol); } catch {}
+    return valid
+      ? `<a class="institute-link" href="${escapeHtml(item[field])}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}">${icon}</a>`
+      : `<span class="institute-link is-unavailable" aria-disabled="true" title="${escapeHtml(label)} — ${escapeHtml(translateText("Link not added yet"))}">${icon}<span class="institute-link-label">${escapeHtml(label)} — ${escapeHtml(translateText("Link not added yet"))}</span></span>`;
+  }).join("")}</div>`;
+};
+
 function renderPortfolio(data) {
+  const highlightLogos = technologyHighlights.map((item) => highlightLogoPaths[item.value] || "");
   data = translatePortfolioData(data);
   document.title = `${data.display_name} | ${data.role}`;
   document.querySelector('meta[name="description"]').content = data.introduction;
   const githubDisplay = data.github.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
   const darkLogo = data.logo_dark_path || data.logo_path || data.logo_light_path;
   document.querySelectorAll(".brand-mark").forEach((mark) => {
+    mark.hidden = data.show_logo === false;
     if (!mark.dataset.fallback) mark.dataset.fallback = mark.textContent;
     mark.replaceChildren();
     if (darkLogo) {
@@ -114,11 +180,11 @@ function renderPortfolio(data) {
   document.querySelector('meta[name="twitter:title"]').content = document.title;
   document.querySelector('meta[name="twitter:description"]').content = data.introduction;
   document.querySelector('meta[name="twitter:image"]').content = socialImage;
-  document.querySelector("#hero-name").innerHTML = `${escapeHtml(data.display_name)}<span>.</span>`;
+  document.querySelector("#hero-name").textContent = data.display_name;
   document.querySelectorAll(".brand").forEach((brand) => {
     brand.setAttribute("aria-label", `${data.display_name} ${translateText("home")}`);
   });
-  document.querySelector("#hero-role").textContent = data.role;
+  document.querySelector("#hero-role").textContent = translateText("Network Engineer");
   document.querySelector("#hero-tagline").textContent = data.tagline;
   document.querySelector("#hero-location").textContent = data.location;
   const heroPhoto = document.querySelector("#hero-photo");
@@ -128,6 +194,9 @@ function renderPortfolio(data) {
     element.textContent = data.display_name;
   });
   document.querySelector("#github-link").href = data.github;
+  const footerWhatsApp = document.querySelector("#footer-whatsapp");
+  footerWhatsApp.hidden = !data.whatsapp;
+  if (data.whatsapp) footerWhatsApp.href = data.whatsapp;
   const footerFacebook = document.querySelector("#footer-facebook");
   if (data.facebook) {
     footerFacebook.href = data.facebook;
@@ -149,9 +218,14 @@ function renderPortfolio(data) {
   initializePortfolioTerminal(data);
 
   document.querySelector("#highlights-list").innerHTML = data.highlights
+    .map((item) => `<div class="highlight"><strong>${escapeHtml(item.value)}</strong><span>${escapeHtml(item.label)}</span></div>`)
+    .join("");
+
+  document.querySelector("#technologies-list").innerHTML = translatePortfolioData(technologyHighlights)
     .map(
-      (item) => `
+      (item, index) => `
         <div class="highlight">
+          ${highlightLogos[index] ? `<img class="highlight-logo" src="${highlightLogos[index]}" alt="" aria-hidden="true" width="28" height="28">` : ""}
           <strong>${escapeHtml(item.value)}</strong>
           <span>${escapeHtml(item.label)}</span>
         </div>`,
@@ -163,88 +237,107 @@ function renderPortfolio(data) {
     <a class="text-link" href="#experience">Explore my experience <span aria-hidden="true">↗</span></a>`;
 
   document.querySelector("#experience-list").innerHTML = data.experience
-    .map(
-      (job, index) => `
-        <article class="timeline-item">
-          <div class="timeline-marker">${String(index + 1).padStart(2, "0")}</div>
-          <div class="experience-card">
-            <div class="experience-meta"><span class="tag">${escapeHtml(job.type)}</span><span class="experience-period">${escapeHtml(job.period)}</span></div>
-            <h3>${escapeHtml(job.role)}</h3>
-            <h4>${escapeHtml(job.company)}</h4>
-            ${renderDetails(`<p>${escapeHtml(job.description)}</p>
+    .map((job, index) => `
+      <article class="timeline-item">
+        <details class="experience-card education-disclosure">
+          <summary>
+            ${renderLearningIcon("network", false, true)}
+            <span class="experience-role">${escapeHtml(job.role)}</span>
+            <span class="experience-company">${escapeHtml(job.company)}</span>
+            <span class="experience-meta"><span class="tag">${escapeHtml(job.type)}</span><span class="experience-period">${escapeHtml(job.period)}</span></span>
+            <span class="education-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="card-details-body">
+            <p>${escapeHtml(job.description)}</p>
             <ul class="check-list">${job.responsibilities.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-            ${renderTags(job.technologies)}`)}
+            ${renderTags(job.technologies)}
           </div>
-        </article>`,
-    )
+        </details>
+      </article>`)
     .join("");
 
   document.querySelector("#skills-list").innerHTML = data.skills
-    .map(
-      (group, index) => `
-        <article class="skill-card">
-          <div class="skill-card-top"><span class="skill-number">${String(index + 1).padStart(2, "0")}</span><span class="skill-symbol" aria-hidden="true">${["⌘", "⌁", "▤", "⌬"][index % 4]}</span></div>
-          <h3>${escapeHtml(group.category)}</h3>
-          ${renderDetails(`<p>${escapeHtml(group.description)}</p>
-          ${renderTags(group.items)}`)}
-        </article>`,
-    )
+    .map((group, index) => `
+      <details class="skill-card education-disclosure">
+        <summary>
+          <span class="skill-card-top"><span class="skill-number">${String(index + 1).padStart(2, "0")}</span><span class="skill-symbol" aria-hidden="true">${["⌘", "⌁", "▤", "⌬"][index % 4]}</span></span>
+          ${renderLearningIcon(group.category, false, true)}
+          <span class="skill-card-title">${escapeHtml(group.category)}</span>
+          <span class="education-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="card-details-body">
+          <p>${escapeHtml(group.description)}</p>
+          ${renderTags(group.items)}
+        </div>
+      </details>`)
     .join("");
 
   document.querySelector("#projects-list").innerHTML = data.projects
-    .map(
-      (project, index) => `
-        <article class="project-card">
-          <div class="project-art project-art-${(index % 4) + 1}">
+    .map((project, index) => `
+      <details class="project-card education-disclosure">
+        <summary>
+          <span class="project-art project-art-${(index % 4) + 1}">
             <span class="project-art-index">PROJECT / ${String(index + 1).padStart(2, "0")}</span>
-            <span class="project-art-shape" aria-hidden="true">${["↗", "⌘", "◷", "⌬"][index % 4]}</span>
+            ${renderLearningIcon([project.title, project.category, ...project.stack].join(" "), false, true)}
             <span class="project-category">${escapeHtml(project.category)}</span>
-          </div>
-          <div class="project-content">
+          </span>
+          <span class="project-content">
             <span class="tag">${escapeHtml(project.status)}</span>
-            <h3>${escapeHtml(project.title)}</h3>
-            ${renderDetails(`<p>${escapeHtml(project.description)}</p>
-            <ul class="project-features">${project.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
-            ${renderTags(project.stack)}
-            ${
-              project.link
-                ? `<a class="text-link project-link" href="${escapeHtml(project.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.link_label)} <span aria-hidden="true">↗</span></a>`
-                : '<span class="project-private-note">No public project link</span>'
-            }`)}
-          </div>
-        </article>`,
-    )
+            <span class="project-card-title">${escapeHtml(project.title)}</span>
+          </span>
+          <span class="education-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="card-details-body">
+          <p>${escapeHtml(project.description)}</p>
+          <ul class="project-features">${project.features.map((feature) => `<li>${escapeHtml(feature)}</li>`).join("")}</ul>
+          ${renderTags(project.stack)}
+          ${project.link === "https://github.com/rabbi432800/ownPortfolio"
+            ? `<a class="button button-secondary project-link project-live-demo" href="https://rabbi432800.github.io/ownPortfolio/" target="_blank" rel="noopener noreferrer">${escapeHtml(translateText("Live Demo"))} <span aria-hidden="true">↗</span></a>`
+            : ""}
+          ${project.link
+            ? `<a class="${project.link === "https://github.com/rabbi432800/ownPortfolio" ? "button button-secondary project-link" : "text-link project-link"}" href="${escapeHtml(project.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.link_label)} <span aria-hidden="true">↗</span></a>`
+            : '<span class="project-private-note">No public project link</span>'}
+        </div>
+      </details>`)
     .join("");
 
   document.querySelector("#education-list").innerHTML = data.education
-    .map(
-      (item) => `
-        <article class="education-card">
+    .map((item) => `
+      <details class="education-card education-disclosure">
+        <summary>
+          ${renderLearningIcon(item.qualification, true)}
           <span class="education-period">${escapeHtml(item.period)}</span>
-          <h4>${escapeHtml(item.qualification)}</h4>
-          <p class="education-institution">${escapeHtml(item.institution)}</p>
-          ${renderDetails(`<p>${escapeHtml(item.details)}</p>
-          <span class="education-result">${escapeHtml(item.result)}</span>`)}
-        </article>`,
-    )
+          <span class="education-card-title">${escapeHtml(item.qualification)}</span>
+          <span class="education-institution">${escapeHtml(item.institution)}</span>
+          <span class="education-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="card-details-body">
+          ${renderInstituteLinks(item)}
+          <p>${escapeHtml(item.details)}</p>
+          <span class="education-result">${escapeHtml(item.result)}</span>
+        </div>
+      </details>`)
     .join("");
 
   document.querySelector("#training-list").innerHTML = data.training
-    .map(
-      (item) => `
-        <article class="education-card training-card">
-          <span class="training-symbol" aria-hidden="true">↗</span>
-          <h4>${escapeHtml(item.name)}</h4>
-          <p class="education-institution">${escapeHtml(item.provider)}</p>
-          ${renderDetails(`<p>${escapeHtml(item.details)}</p>`)}
-        </article>`,
-    )
+    .map((item) => `
+      <details class="education-card training-card education-disclosure">
+        <summary>
+          ${renderLearningIcon(item.name)}
+          <span class="education-card-title">${escapeHtml(item.name)}</span>
+          <span class="education-institution">${escapeHtml(item.provider)}</span>
+          <span class="education-chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="card-details-body">${renderInstituteLinks(item)}
+          <p>${escapeHtml(item.details)}</p></div>
+      </details>`)
     .join("");
 
   document.querySelector("#knowledge-list").innerHTML = data.knowledge_sharing
     .map(
       (item, index) => `
         <article class="knowledge-card">
+          ${renderLearningIcon(item.title, false, true)}
           <span class="knowledge-number">${String(index + 1).padStart(2, "0")}</span>
           <h3>${escapeHtml(item.title)}</h3>
           <p>${escapeHtml(item.description)}</p>
@@ -265,7 +358,19 @@ function renderPortfolio(data) {
   if (data.facebook) {
     methods.push(`<a class="contact-method" href="${escapeHtml(data.facebook)}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">f</span><div><small>FACEBOOK</small><strong>View Facebook profile</strong></div><b aria-hidden="true">↗</b></a>`);
   }
+  if (data.whatsapp) {
+    methods.push(`<a class="contact-method" href="${escapeHtml(data.whatsapp)}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a9 9 0 0 1-13.3 8L3 21l1.5-4.7A9 9 0 1 1 21 11.5Z"/><path d="m8.2 7.3-1 1.2c-.8 2 3.5 6.4 5.8 6.6l1.6-.8.5-1.8-2.4-1.1-.9 1c-1.3-.6-2.2-1.6-2.8-2.8l1-.9-1-2.1Z"/></svg></span><div><small>WHATSAPP</small><strong>${escapeHtml(translateText("Chat on WhatsApp"))}</strong></div><b aria-hidden="true">↗</b></a>`);
+  }
   document.querySelector("#contact-methods").innerHTML = methods.join("");
+  document.querySelectorAll(".contact-method").forEach((card) => {
+    card.insertAdjacentHTML("beforeend", renderLearningIcon("contact", false, true));
+  });
+  for (const [selector, topic] of [[".about-panel", "education"], [".contact-form", "mail"], [".github-banner", "github"]]) {
+    const panel = document.querySelector(selector);
+    panel.querySelector(":scope > .learning-watermark")?.remove();
+    panel.insertAdjacentHTML("beforeend", renderLearningIcon(topic, selector === ".about-panel", true));
+  }
+
 
   document.querySelector("#contact-form").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -658,6 +763,7 @@ function initializePortfolioTerminal(data) {
         data.email ? `Email: ${data.email}` : "Email: not configured yet",
         data.linkedin ? `LinkedIn: ${data.linkedin}` : "",
         data.facebook ? `Facebook: ${data.facebook}` : "",
+        data.whatsapp ? `WhatsApp: ${data.whatsapp}` : "",
       ]
         .filter(Boolean)
         .join("\n"),
@@ -868,3 +974,142 @@ fetch("./portfolio.json")
     console.error("Could not load portfolio content:", error);
     document.querySelector("#load-error").hidden = false;
   });
+
+// Animate both directions without snapping native details shut mid-transition.
+const disclosureAnimations = new WeakMap();
+const toggleCardDetails = (card) => {
+  const previous = disclosureAnimations.get(card);
+  const expanding = previous ? !previous.expanding : !card.open;
+  const startHeight = card.getBoundingClientRect().height;
+  const body = card.querySelector(":scope > .card-details-body");
+  const summary = card.querySelector(":scope > summary");
+  const originalHeight = previous?.originalHeight ?? card.style.height;
+  const originalOverflow = previous?.originalOverflow ?? card.style.overflow;
+  previous?.heightAnimation.cancel();
+  previous?.bodyAnimation?.cancel();
+  card.dataset.expanded = String(expanding);
+  summary.setAttribute("aria-expanded", String(expanding));
+  if (!card.animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    card.open = expanding;
+    card.style.height = originalHeight;
+    card.style.overflow = originalOverflow;
+    disclosureAnimations.delete(card);
+    return;
+  }
+  card.open = true;
+  card.style.height = originalHeight;
+  const endHeight = expanding ? card.getBoundingClientRect().height
+    : summary.getBoundingClientRect().height + card.clientTop * 2;
+  card.style.height = `${startHeight}px`;
+  card.style.overflow = "hidden";
+  const timing = {duration: expanding ? 340 : 280, easing: "cubic-bezier(.22,.7,.25,1)", fill: "both"};
+  const heightAnimation = card.animate([{height: `${startHeight}px`}, {height: `${endHeight}px`}], timing);
+  const bodyAnimation = body?.animate(expanding
+    ? [{opacity: 0, transform: "translateY(5px)"}, {opacity: 1, transform: "translateY(0)"}]
+    : [{opacity: 1, transform: "translateY(0)"}, {opacity: 0, transform: "translateY(3px)"}], timing);
+  const state = {expanding, heightAnimation, bodyAnimation, originalHeight, originalOverflow};
+  disclosureAnimations.set(card, state);
+  heightAnimation.onfinish = () => {
+    if (disclosureAnimations.get(card) !== state) return;
+    card.open = expanding;
+    card.style.height = originalHeight;
+    card.style.overflow = originalOverflow;
+    heightAnimation.cancel();
+    bodyAnimation?.cancel();
+    disclosureAnimations.delete(card);
+  };
+};
+for (const listId of ["education-list", "training-list", "experience-list", "skills-list", "projects-list"]) {
+  document.getElementById(listId).addEventListener("click", (event) => {
+    const card = event.target.closest(".education-disclosure");
+    if (!card || event.target.closest("a, button, input, textarea, select, .institute-link")) return;
+    if (window.getSelection()?.toString()) return;
+    event.preventDefault();
+    toggleCardDetails(card);
+  });
+}
+
+// Language disclosure supports pointer hover, touch, keyboard, and Escape.
+const languageDropdown = document.querySelector(".language-dropdown");
+const languageTrigger = languageDropdown.querySelector(".language-trigger");
+const languageOptions = document.querySelector("#language-options");
+document.querySelector("#current-language").textContent = activeLanguage;
+const setLanguageOpen = (open) => {
+  languageTrigger.setAttribute("aria-expanded", String(open));
+  languageOptions.hidden = !open;
+};
+languageDropdown.addEventListener("pointerenter", (event) => {
+  if (event.pointerType === "mouse") setLanguageOpen(true);
+});
+languageDropdown.addEventListener("pointerleave", (event) => {
+  if (event.pointerType === "mouse") setLanguageOpen(false);
+});
+languageTrigger.addEventListener("click", (event) => {
+  // Pointer hover has already opened the dropdown: keep it open on mouse click.
+  setLanguageOpen(event.detail > 0 && window.matchMedia("(hover: hover)").matches
+    ? true : languageOptions.hidden);
+});
+languageTrigger.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowDown") {
+    event.preventDefault(); setLanguageOpen(true);
+    languageOptions.querySelector("button").focus();
+  }
+});
+languageDropdown.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault(); setLanguageOpen(false); languageTrigger.focus();
+  }
+});
+languageDropdown.addEventListener("focusout", (event) => {
+  if (!languageDropdown.contains(event.relatedTarget)) setLanguageOpen(false);
+});
+document.addEventListener("click", (event) => {
+  if (!languageDropdown.contains(event.target)) setLanguageOpen(false);
+});
+
+// The underline follows each link's actual text bounds, not its padded hit area.
+const navLine = navigation.querySelector(".nav-hover-line");
+const navLinks = [...navigation.querySelectorAll(":scope > a:not(.nav-cta)")];
+let hoveredNavLink = null;
+const hideNavLine = () => { navLine.style.opacity = "0"; };
+const placeNavLine = (link) => {
+  if (!link || !link.getClientRects().length) { hideNavLine(); return; }
+  const navRect = navigation.getBoundingClientRect();
+  const range = document.createRange();
+  range.selectNodeContents(link);
+  const textRect = range.getBoundingClientRect();
+  if (!textRect.width) { hideNavLine(); return; }
+  navLine.style.width = `${textRect.width}px`;
+  navLine.style.transform = `translate3d(${textRect.left - navRect.left - navigation.clientLeft}px, ${textRect.bottom - navRect.top - navigation.clientTop + 4}px, 0)`;
+  navLine.style.opacity = "1";
+};
+navigation.addEventListener("pointermove", (event) => {
+  if (event.pointerType !== "mouse") return;
+  const link = event.target.closest("a");
+  const next = navLinks.includes(link) ? link : null;
+  if (hoveredNavLink === next) return;
+  hoveredNavLink = next;
+  if (next) placeNavLine(next); else hideNavLine();
+});
+navigation.addEventListener("pointerleave", () => {
+  hoveredNavLink = null;
+  hideNavLine();
+});
+navigation.addEventListener("focusin", (event) => {
+  if (navLinks.includes(event.target)) placeNavLine(event.target);
+  else hideNavLine();
+});
+navigation.addEventListener("focusout", (event) => {
+  if (!navLinks.includes(event.relatedTarget)) hideNavLine();
+});
+navigation.addEventListener("click", (event) => {
+  if (event.target.closest("a")) { hoveredNavLink = null; hideNavLine(); }
+});
+window.addEventListener("resize", () => {
+  const focusedLink = navLinks.includes(document.activeElement) ? document.activeElement : null;
+  if (hoveredNavLink || focusedLink) placeNavLine(hoveredNavLink || focusedLink);
+  else hideNavLine();
+});
+if (document.fonts?.ready) document.fonts.ready.then(() => {
+  if (hoveredNavLink) placeNavLine(hoveredNavLink);
+});

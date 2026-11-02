@@ -49,10 +49,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px rgba(118,224,176,.45); }
 .eyebrow { color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .hero-eyebrow { margin: 31px 0 12px; }
-.hero h1 { max-width: 760px; margin: 0; font-size: clamp(46px, 6vw, 78px); font-weight: 700; line-height: 1.08; letter-spacing: -.045em; }
+.hero h1 { max-width: 760px; margin: 0; font-size: clamp(36px, 4.6vw, 56px); font-weight: 650; line-height: 1.18; letter-spacing: -.035em; }
 .hero h1 span { color: var(--accent); }
-.hero h2 { margin: 17px 0 0; color: #b7c8d8; font-size: clamp(16px, 1.7vw, 20px); font-weight: 500; }
-.hero-tagline { max-width: 470px; margin: 13px 0 0; color: #d7e5ef; font-size: 16px; font-weight: 500; line-height: 1.8; }
+.hero h2 { margin: 17px 0 0; color: #b7c8d8; font-size: clamp(14px, 1.5vw, 17px); font-weight: 500; }
+.hero-tagline { max-width: 470px; margin: 14px 0 0; color: #d7e5ef; font-size: 15px; font-weight: 400; line-height: 1.7; }
 .hero-description, .section-heading > p, .about-copy p, .principle p, .experience-card > p, .skill-card > p, .project-content > p, .education-card > p, .knowledge-card > p, .contact-copy > p, .github-banner p { text-align: left; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 29px; }
 .button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 9px; border: 1px solid transparent; border-radius: 12px; padding: 10px 17px; font-size: 13px; font-weight: 650; letter-spacing: .005em; cursor: pointer; transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease; }
@@ -179,7 +179,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .skill-card-top { display: flex; align-items: center; justify-content: space-between; }
 .skill-symbol { color: rgba(88,214,232,.7); font-size: 20px; }
 .skill-card h3 { margin: 15px 0 4px; font-size: 16px; font-weight: 650; }
-.skills-note { margin: 18px 0 0; color: #76899d; font-size: 12px; line-height: 1.7; }
+.skills-note { margin: 18px 0 0; color: #76899d; font-size: 12px; line-height: 1.7; text-align: center; }
 .projects-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .project-card { overflow: hidden; }
 .project-art { position: relative; display: flex; min-height: 145px; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 16px; background: radial-gradient(ellipse at 70% 40%, rgba(47,175,195,.21), transparent 54%), #0b1724; }
@@ -321,7 +321,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (max-width: 900px) {
   .navigation { gap: 12px; font-size: 11px; }
   .hero-grid { gap: 27px; }
-  .hero h1 { font-size: clamp(38px, 5.4vw, 56px); }
+  .hero h1 { font-size: clamp(32px, 4.5vw, 42px); }
   .portrait-index { right: -15px; }
   .knowledge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -336,7 +336,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .language-switcher { align-self: flex-start; margin: 8px 10px; }
   .hero { min-height: auto; }
   .hero-grid { grid-template-columns: 1fr; gap: 38px; padding-top: 58px; padding-bottom: 57px; }
-  .hero h1 { font-size: clamp(39px, 9vw, 58px); }
+  .hero h1 { font-size: clamp(30px, 7.8vw, 42px); }
   .hero-visual { min-height: 0; }
   .portrait-frame { width: min(76%, 340px); }
   .terminal-shell { right: 12px; bottom: 78px; width: min(440px, calc(100vw - 24px)); }
@@ -388,3 +388,324 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   from { opacity: .7; transform: scale(.96) rotate(-3deg); }
   to { opacity: 1; transform: scale(1.04) rotate(3deg); }
 }
+
+/* Identity stays quiet; the professional focus leads the hero. */
+.hero-intro { margin: 0 0 15px; color: var(--muted); font-size: clamp(15px, 1.6vw, 18px); line-height: 1.6; font-weight: 400; }
+.hero-intro #hero-name { color: var(--text); font-weight: 550; }
+.hero #hero-role { color: var(--text); text-wrap: balance; }
+.hero-tagline { max-width: 365px; margin-top: 21px; padding-left: 14px; border-left: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); color: var(--muted); font-style: italic; }
+
+/* Knowledge cards follow the same restrained interaction as other sections. */
+.knowledge-card { transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
+@media (hover: hover) {
+  :root .knowledge-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 10%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-card { transition: none; }
+  :root .knowledge-card:hover { transform: none; }
+}
+
+/* Education and training use a whole-card native disclosure, without a button. */
+.education-disclosure { padding: 0; cursor: pointer; }
+.education-disclosure > summary {
+  position: relative;
+  display: block;
+  padding: 17px 43px 17px 17px;
+  list-style: none;
+  cursor: pointer;
+  border-radius: inherit;
+}
+.education-disclosure > summary::-webkit-details-marker { display: none; }
+.education-disclosure > summary::marker { content: ''; }
+.education-card-title { display: block; margin: 7px 0 4px; font-size: 14px; font-weight: 650; line-height: 1.6; }
+.training-card .education-card-title { margin-top: 0; }
+.education-disclosure .education-institution { display: block; font-size: 13px; }
+.education-chevron { position: absolute; top: 16px; right: 17px; color: var(--accent); font-size: 20px; line-height: 1; transition: transform .2s ease; }
+.education-disclosure[open] .education-chevron { transform: rotate(180deg); }
+.education-disclosure > .card-details-body { margin: 0 17px 17px; padding-top: 10px; }
+.education-disclosure > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.education-disclosure[open] > .card-details-body { animation: details-reveal .25s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .education-chevron { transition: none; }
+  .education-disclosure[open] > .card-details-body { animation: none; }
+}
+
+/* Learning cards echo the project artwork with restrained, relevant line icons. */
+.education-disclosure > summary { isolation: isolate; overflow: hidden; }
+.education-disclosure > summary::before {
+  position: absolute; z-index: -1; inset: 0; pointer-events: none; content: '';
+  background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 68%);
+}
+.learning-icon { display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 12px; border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent); border-radius: 9px; color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.learning-icon svg { width: 21px; height: 21px; }
+.learning-watermark { position: absolute; z-index: -1; pointer-events: none; right: 14px; bottom: -10px; width: 90px; height: 90px; color: var(--accent); opacity: .055; transform: rotate(-12deg); transition: transform .3s ease, opacity .3s ease; }
+.learning-watermark svg { width: 100%; height: 100%; }
+@media (hover: hover) {
+  .education-disclosure:hover .learning-watermark { transform: rotate(-5deg) scale(1.06); opacity: .1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-watermark { transition: none; }
+  .education-disclosure:hover .learning-watermark { transform: rotate(-12deg); }
+}
+
+/* Experience shares the learning-card disclosure while retaining the timeline. */
+.experience-card.education-disclosure { position: relative; padding: 0; min-width: 0; }
+.experience-card.education-disclosure > summary { padding: 22px 46px 22px 22px; }
+.experience-card.education-disclosure > .card-details-body { margin: 0 22px 22px; }
+.experience-role { display: block; margin: 14px 0 3px; font-size: clamp(16px, 2vw, 20px); font-weight: 650; line-height: 1.5; }
+.experience-company { display: block; color: var(--accent); font-size: 13px; font-weight: 600; }
+@media (max-width: 420px) {
+  .experience-card.education-disclosure > summary { padding: 17px 39px 17px 17px; }
+  .experience-card.education-disclosure > .card-details-body { margin: 0 17px 17px; }
+}
+
+/* Experience reads in order: role, company, employment type and dates. */
+#experience-list .timeline-item { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.experience-card .experience-role { margin-top: 0; }
+.experience-card .experience-company { margin-top: 4px; }
+.experience-card .experience-meta { justify-content: flex-start; margin-top: 14px; gap: 10px 16px; }
+
+/* Skills use the same whole-card disclosure as education and experience. */
+.skill-card.education-disclosure { position: relative; padding: 0; min-width: 0; }
+.skill-card.education-disclosure > summary { padding: 20px 44px 20px 20px; }
+.skill-card.education-disclosure > .card-details-body { margin: 0 20px 20px; }
+.skill-card-title { display: block; margin: 15px 0 4px; font-size: 16px; font-weight: 650; line-height: 1.6; }
+
+/* Project artwork is part of the disclosure; outbound links remain independent. */
+.project-card.education-disclosure { padding: 0; position: relative; min-width: 0; }
+.project-card.education-disclosure > summary { padding: 0; }
+.project-card.education-disclosure > summary::before { display: none; }
+.project-card.education-disclosure .project-content { display: block; padding: 19px; }
+.project-card-title { display: block; margin: 11px 0 5px; font-size: 18px; font-weight: 650; line-height: 1.4; }
+.project-card.education-disclosure > .card-details-body { margin: 0 19px 19px; }
+.project-card.education-disclosure .education-chevron { z-index: 2; top: 12px; right: 14px; }
+.project-card.education-disclosure > summary:focus-visible { outline-offset: -3px; }
+
+/* Shared project-inspired lighting across the public content cards. */
+:root { --card-light: #58c5dc; --card-depth: rgba(0,0,0,.13); }
+:root[data-theme="light"] { --card-light: #347b99; --card-depth: rgba(36,75,88,.07); }
+:root:is([data-theme], :not([data-theme])) body :is(.about-panel, .experience-card,
+  .skill-card, .education-card, .knowledge-card, .project-card, .contact-form, .contact-method, .github-banner) {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--card-light) 4%, transparent), transparent 68%),
+    color-mix(in srgb, var(--theme-panel) 18%, transparent);
+  border-color: color-mix(in srgb, var(--theme-border) 48%, transparent);
+  box-shadow: none;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.skill-card:nth-child(2n), .knowledge-card:nth-child(2n), .training-card { --card-light: #909ad5; }
+.skill-card:nth-child(3n), .knowledge-card:nth-child(3n) { --card-light: #58ae98; }
+.knowledge-card { overflow: hidden; }
+.learning-watermark { width: 96px; height: 96px; opacity: .075; color: var(--card-light); }
+.knowledge-card .learning-watermark { right: -8px; bottom: -8px; }
+.experience-card .learning-watermark { right: 24px; bottom: -16px; }
+.skill-card .learning-watermark { right: 6px; bottom: -14px; }
+.about-panel::after, .contact-form::after, .github-banner::after {
+  position: absolute; z-index: -1; pointer-events: none; right: 22px; top: 8px;
+  font: 100px/1.2 ui-monospace, monospace; color: var(--card-light); opacity: .055;
+  content: '⌘'; transform: rotate(-12deg);
+}
+.contact-form::after { content: '✉'; }
+.github-banner::after { content: '</>'; font-size: 65px; }
+@media (hover: hover) {
+  :root:is([data-theme], :not([data-theme])) body :is(.about-panel, .experience-card,
+    .skill-card, .education-card, .knowledge-card, .contact-form, .github-banner):hover {
+    border-color: color-mix(in srgb, var(--card-light) 22%, transparent);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--card-light) 4%, transparent);
+  }
+  .knowledge-card:hover .learning-watermark { transform: rotate(-5deg) scale(1.06); opacity: .12; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:is([data-theme], :not([data-theme])) body :is(.about-panel, .experience-card,
+    .skill-card, .education-card, .knowledge-card, .contact-form, .contact-method, .github-banner) { transition: none; }
+  .knowledge-card:hover .learning-watermark { transform: rotate(-12deg); }
+}
+
+/* Airier artwork and decorative layers let the section background show through. */
+:root body .project-card .project-art {
+  background: radial-gradient(ellipse at 75% 40%, color-mix(in srgb, var(--card-light) 10%, transparent), transparent 70%);
+}
+:root body .education-disclosure > summary::before { opacity: .4; }
+:root body .learning-watermark { opacity: .04; }
+:root body :is(.about-panel, .contact-form, .github-banner)::after { opacity: .035; }
+@media (hover: hover) {
+  :root body :is(.education-disclosure, .knowledge-card):hover .learning-watermark { opacity: .07; }
+}
+
+/* A more balanced professional heading across desktop and mobile. */
+.hero #hero-role { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.2; }
+@media (max-width: 760px) {
+  .hero #hero-role { font-size: clamp(27px, 6.5vw, 36px); }
+}
+
+/* Floating technology marks belong to Skills, with no boxed strip or dividers. */
+.highlights-grid.technology-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; margin-top: 35px; background: transparent; }
+#technologies-list .highlight { position: relative; isolation: isolate; min-width: 0; padding: 18px 4px; border: 0; background: transparent; box-shadow: none; gap: 6px; }
+#technologies-list .highlight::before { position: absolute; z-index: -1; top: 7px; left: 50%; width: 65px; height: 65px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); content: ''; opacity: 0; transform: translateX(-50%) scale(.7); transition: opacity .3s ease, transform .3s ease; pointer-events: none; }
+#technologies-list .highlight-logo { display: block; width: 32px; height: 32px; object-fit: contain; margin-bottom: 8px; transition: transform .35s cubic-bezier(.2,.7,.2,1), filter .3s ease; }
+#technologies-list .highlight strong { color: var(--text); font-size: 13px; font-weight: 550; line-height: 1.5; transition: color .25s ease; }
+#technologies-list .highlight span { font-size: 10px; line-height: 1.5; }
+@media (hover: hover) {
+  #technologies-list .highlight:hover .highlight-logo { transform: translateY(-7px) scale(1.08); filter: drop-shadow(0 5px 7px color-mix(in srgb, var(--accent) 20%, transparent)); }
+  #technologies-list .highlight:hover::before { opacity: 1; transform: translateX(-50%) scale(1.15); }
+  #technologies-list .highlight:hover strong { color: var(--accent); }
+}
+@media (max-width: 1000px) { .highlights-grid.technology-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .highlights-grid.technology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } }
+@media (prefers-reduced-motion: reduce) {
+  #technologies-list .highlight-logo, #technologies-list .highlight::before, #technologies-list .highlight strong { transition: none; }
+  #technologies-list .highlight:hover .highlight-logo { transform: none; }
+}
+
+/* Original four career highlights remain directly below the profile. */
+#highlights-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+#highlights-list .highlight { padding: 22px 18px; gap: 2px; border-top: 0; border-right: 1px solid var(--line); }
+#highlights-list .highlight:last-child { border-right: 0; }
+#highlights-list .highlight strong { font-size: 18px; }
+#highlights-list .highlight span { font-size: 11px; }
+@media (max-width: 760px) {
+  #highlights-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #highlights-list .highlight:nth-child(2n) { border-right: 0; }
+  #highlights-list .highlight:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+
+/* Public typography: a compact hierarchy with comfortable reading sizes. */
+:root {
+  --type-section: clamp(24px, 2.5vw, 30px);
+  --type-card: 16px;
+  --type-body: 14px;
+  --type-small: 12px;
+}
+.section-heading { max-width: 720px; margin-bottom: 30px; }
+.section-heading-top { margin-bottom: 11px; gap: 10px; }
+.section-heading h2 {
+  font-size: var(--type-section);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.section-heading > p { margin-top: 12px; max-width: 620px; font-size: var(--type-body); line-height: 1.75; }
+.section-heading .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .12em; }
+.about-copy p, .contact-copy > p { font-size: var(--type-body); line-height: 1.8; }
+.experience-role, .skill-card-title, .project-card-title,
+.column-title, .github-banner h3 { font-size: var(--type-card); font-weight: 600; line-height: 1.5; }
+.education-card-title, .knowledge-card h3, .principle h3 { font-size: 14px; font-weight: 600; line-height: 1.55; }
+.contact-copy h3, .form-heading h3 { font-size: 18px; font-weight: 600; line-height: 1.5; }
+.card-details-body > p, .card-details-body li, .principle p,
+.knowledge-card p, .github-banner p { font-size: 13px; line-height: 1.8; }
+.experience-company, .education-disclosure .education-institution { font-size: 13px; line-height: 1.65; }
+.skills-note, .experience-period, .education-period { font-size: var(--type-small); line-height: 1.7; }
+.hero-intro { font-size: clamp(15px, 1.4vw, 17px); }
+.hero #hero-role { font-size: clamp(28px, 3vw, 38px); font-weight: 600; line-height: 1.25; }
+.hero-tagline { font-size: var(--type-body); line-height: 1.8; }
+@media (max-width: 760px) {
+  .section-heading h2 { font-size: clamp(23px, 5.6vw, 27px); }
+  .section-heading { margin-bottom: 25px; }
+  .hero #hero-role { font-size: clamp(27px, 6vw, 34px); }
+}
+
+/* Institute links form a quiet row of useful destinations in expanded cards. */
+.institute-links { display: flex; gap: 9px; margin: 4px 0 14px; }
+.institute-link { display: inline-grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--theme-border); border-radius: 9px; color: var(--muted); background: transparent; transition: color .2s, border-color .2s, background .2s, transform .2s; }
+.institute-link svg { width: 16px; height: 16px; }
+.institute-link.is-unavailable { opacity: .35; cursor: default; }
+.institute-link-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+a.institute-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+@media (hover: hover) {
+  a.institute-link:hover { transform: translateY(-2px); color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .institute-link { transition: none; }
+  a.institute-link:hover { transform: none; }
+}
+
+/* Institute icons respond even before a destination has been added. */
+.institute-link svg { transition: transform .25s ease, filter .25s ease; }
+@media (hover: hover) {
+  .institute-links .institute-link:hover {
+    transform: translateY(-3px);
+    color: var(--accent);
+    border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+    background: color-mix(in srgb, var(--accent) 9%, transparent);
+    box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 13%, transparent);
+  }
+  .institute-links .institute-link:hover svg {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 20%, transparent));
+  }
+  .institute-links .institute-link.is-unavailable:hover { opacity: .65; cursor: default; }
+}
+.institute-links a.institute-link:focus-visible {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .institute-link svg { transition: none; }
+  .institute-links .institute-link:hover,
+  .institute-links .institute-link:hover svg { transform: none; }
+}
+
+/* Height and content motion are coordinated by the disclosure controller. */
+.education-disclosure[open] > .card-details-body { animation: none; }
+.education-disclosure[data-expanded="false"] .education-chevron { transform: rotate(0deg); }
+.education-disclosure[data-expanded="true"] .education-chevron { transform: rotate(180deg); }
+.education-disclosure .education-chevron { transition: transform .28s cubic-bezier(.22,.7,.25,1); }
+@media (prefers-reduced-motion: reduce) {
+  .education-disclosure .education-chevron { transition: none; }
+}
+
+.learning-icon img { display: block; width: 24px; height: 24px; object-fit: contain; }
+.learning-watermark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.ccna-icon { color: var(--accent); background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--accent) 16%, transparent); }
+.ccna-icon svg { width: 25px; height: 25px; }
+
+/* One consistent line-art treatment for decorative card watermarks. */
+:root body :is(.about-panel, .contact-form, .github-banner)::after { content: none; }
+:root body :is(.about-panel, .contact-form, .github-banner, .contact-method) { overflow: hidden; }
+:root body .learning-watermark {
+  width: 100px;
+  height: 100px;
+  right: 16px;
+  bottom: -14px;
+  color: var(--card-light, var(--accent));
+  opacity: .045;
+  filter: drop-shadow(0 3px 8px color-mix(in srgb, var(--accent) 12%, transparent));
+}
+:root body .learning-watermark svg { stroke-width: 1.15; }
+:root body .project-art .learning-watermark { z-index: 0; width: 110px; height: 110px; right: 35px; bottom: 8px; opacity: .19; }
+:root body .contact-method .learning-watermark { width: 52px; height: 52px; right: 24px; bottom: -8px; }
+:root body .github-banner .learning-watermark { right: 38%; }
+@media (hover: hover) {
+  :root body :is(.education-disclosure, .knowledge-card, .about-panel, .contact-form, .github-banner, .contact-method):hover .learning-watermark {
+    opacity: .085;
+    transform: rotate(-6deg) scale(1.04);
+  }
+  :root body .project-card:hover .project-art .learning-watermark { opacity: .26; }
+}
+@media (max-width: 760px) { :root body .github-banner .learning-watermark { right: 18px; } }
+@media (prefers-reduced-motion: reduce) {
+  :root body :is(.education-disclosure, .knowledge-card, .about-panel, .contact-form, .github-banner, .contact-method):hover .learning-watermark { transform: rotate(-12deg); }
+}
+
+/* Center the footer copyright and social destinations as one balanced group. */
+.site-footer .footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+.site-footer .footer-socials { justify-content: center; flex-wrap: wrap; }
+
+.contact-method > span > svg { width: 21px; height: 21px; }
+.footer-socials #footer-whatsapp svg { fill: none; }
+
+.project-live-demo { margin-right: 8px; }
