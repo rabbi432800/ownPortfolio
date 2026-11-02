@@ -964,7 +964,7 @@ navigation.querySelectorAll("a").forEach((link) => {
   });
 });
 
-fetch("./portfolio.json")
+fetch("./portfolio.json?v=ac4e47689f1d")
   .then((response) => {
     if (!response.ok) throw new Error(`Portfolio API returned ${response.status}`);
     return response.json();

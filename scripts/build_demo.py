@@ -1,5 +1,6 @@
 """Export the public portfolio to docs/ for GitHub Pages (standard library only)."""
 import json
+import hashlib
 import re
 import shutil
 import sys
@@ -64,13 +65,22 @@ def main():
                     'new URL(data.og_image_path, document.baseURI)')
     js = js.replace('window.location.assign("/myterminal");\n      return "Opening the private portfolio panel...";',
                     'return "Admin access is unavailable in this public demo.";')
-    (output / 'index.html').write_text(html, encoding='utf-8')
     (output / 'portfolio.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    data_version = hashlib.sha256((output / 'portfolio.json').read_bytes()).hexdigest()[:12]
+    js = js.replace('fetch("./portfolio.json")', f'fetch("./portfolio.json?v={data_version}")')
     shutil.copytree(ROOT / 'frontend/css', output / 'css')
     (output / 'js').mkdir()
     for name in ('theme.js', 'translations.js'):
         shutil.copy2(ROOT / 'frontend/js' / name, output / 'js' / name)
     (output / 'js/app.js').write_text(js, encoding='utf-8')
+    # Changed files get new URLs so returning visitors receive the latest demo.
+    def version_asset(match):
+        path = match.group(1)
+        version = hashlib.sha256((output / path).read_bytes()).hexdigest()[:12]
+        return f'./{path}?v={version}'
+
+    html = re.sub(r'\./((?:css|js)/[\w.-]+)(?:\?v=[\w.-]+)?', version_asset, html)
+    (output / 'index.html').write_text(html, encoding='utf-8')
     (output / '.nojekyll').touch()
     print(f'Exported public demo to {output} ({len(assets)} public assets).')
 
